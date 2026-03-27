@@ -1,155 +1,236 @@
 {
-  "app": {
-    "title": "Los castillos de Borgoña",
-    "subtitle": "Una guía de juego en lenguaje simple",
-    "footer": "🏰 Los castillos de Borgoña — Guía de juegos 🏰"
-  },
-  "overview": {
-    "heading": "Lo que está tratando de hacer",
-    "body": "Tiene un tablero de juego personal, su ducado, una cuadrícula de espacios hexagonal de colores. Cada turno tira dos dados y los usa para recoger azulejos o colocarlos en su ducado. Diferentes mosaicos hacen cosas diferentes. Gana puntos llenando áreas y vendiendo productos. La mayoría de los puntos gana.",
-    "sidenav": "Descripción general"
-  },
-  "setup": {
-    "sidenav": "Configuración",
-    "heading": "Configuración del juego",
-    "intro": "Coloque el tablero de juego compartido en el centro de la mesa.",
-    "playerGetsHeading": "Cada jugador obtiene",
-    "playerGets": [
-      "Una junta de ducado personal",
-      "Estos pueden ser todos idénticos (#1 o #2) o seleccionados al azar",
-      "Una tarjeta de referencia",
-      "2 dados, 2 marcadores de jugador, 1 marcador de puntuación (en su color)",
-      "1 azulejo de castillo → colocado en el centro de su ducado",
-      "3 baldosas de productos → colocadas en el área de almacenamiento inferior derecha",
-      "1 moneda de plata → colocada en la parte superior derecha"
-    ],
-    "sharedBoardHeading": "En la Junta Compartida",
-    "sharedBoard": [
-      "Ordene las baldosas hexagonal de colores por color, manténgalas boca abajo",
-      "Desplace los azulejos de los productos boca abajo; coloque 5 en cada espacio A—E",
-      "Coloque mosaicos adicionales en puntos de color coincidentes (uno grande en la parte superior)"
-    ],
-    "firstPlayerHeading": "Determinar el primer jugador",
-    "firstPlayerRoll": "Todo el mundo saca un dado, lo más alto va primero. El primer jugador obtiene {workers1}, el segundo obtiene {workers2}, el tercero obtiene {workers3}, y así sucesivamente. El primer jugador también recibe el especial {whiteDie}.",
-    "bridgeNote": "Coloque marcadores en la pista de puntuación y en la pista de orden de giro (llamada\"el puente\")."
-  },
-  "gameFlow": {
-    "sidenav": "Flujo del juego",
-    "heading": "Cómo fluye el juego",
-    "intro": "El juego se juega en <strong>5 fases</strong> (A a E), cada una con <strong>5 rondas</strong>, <strong>25 rondas en total</strong>.",
-    "phases": ["A", "B", "C", "D", "E"],
-    "roundsLabel": "Rondas",
-    "startHeading": "Inicio de cada fase",
-    "startSteps": [
-      "Retire los mosaicos sobrantes del tablero compartido",
-      "Coloque los mosaicos de productos nuevos en el espacio de fase correspondiente",
-      "Llene los espacios del depósito con azulejos de colores boca arriba de pilas coincidentes",
-      "Rellene los espacios negros centrales con mosaicos aleatorios con respaldo negro (boca arriba)"
-    ],
-    "endHeading": "Fin de cada fase",
-    "endSteps": [
-      "Cada jugador gana 1 moneda de plata por ficha de mina en su ducado",
-      "Compruebe los mosaicos del monasterio para ver si hay efectos de final de fase"
-    ],
-    "roundHeading": "Cada ronda",
-    "roundDesc": "Todos los jugadores tiran sus dos dados. El primer jugador también tira el dado blanco: determina qué depósito recibe una nueva ficha de productos. Luego, en orden de turnos, cada jugador toma su turno."
-  },
-  "yourTurn": {
-    "sidenav": "Su turno",
-    "heading": "Lo que hace en su turno",
-    "intro": "Obtiene <strong>dos acciones</strong>: una por cada día. Para cada uno, elija uno:",
-    "actions": [
-      { "icon": "🫳", "title": "Recoja un azulejo", "desc": "Tome un azulejo del depósito que coincida con su número de dado. Almacenarlo en su ducado (máximo 3). Si está lleno, deseche uno primero." },
-      { "icon": "🧩", "title": "Coloque un azulejo", "desc": "Mueva un azulejo del almacenamiento a un espacio vacío correspondiente en su ducado. Debe coincidir con el número de troquel, el color del azulejo y estar adyacente a un azulejo existente." },
-      { "icon": "💰", "title": "Vender bienes", "desc": "Vende una pila de productos del mismo tipo. Gane 1 plata +VP igual a (número de jugadores x fichas vendidas)." },
-      { "icon": "👷", "title": "Tome a los trabajadores", "desc": "Obtenga 2 fichas de trabajador del suministro." }
-    ],
-    "buyCenter": "<strong>⑤ Compre en el centro (acción adicional):</strong> Una vez por turno, gaste 2 monedas de plata para tomar una baldosa del área central negra. Esto <em>se suma</em> a sus dos acciones normales.",
-    "workerTip": "<strong>Los trabajadores</strong> le permiten ajustar un dado en ± 1 (envoltura: 6 ↔ 1). Gaste un trabajador por ajuste. Apílelos para turnos más grandes."
-  },
-  "scoring": {
-    "sidenav": "Puntuación",
-    "heading": "Cómo anotar puntos",
-    "areasHeading": "🏘️ Completar áreas",
-    "areasDesc": "Cuando llena todos los espacios en un grupo conectado del mismo color, puntajes basados en:",
-    "areasCriteria": [
-      "<strong>Tamaño del área</strong>: más espacios = más puntos (consulte la tabla a bordo)",
-      "<strong>Fase actual</strong>: las fases anteriores dan puntos de bonificación"
-    ],
-    "colorHeading": "🎨 Completar un color",
-    "colorDesc": "Llene cada espacio de un solo color en todo su ducado → recoja la ficha de bonificación correspondiente y anote sus puntos.",
-    "bridgeHeading": "🌉 Orden de giro (\"El puente\")",
-    "bridgeDesc": "Ciertas acciones hacen avanzar su marcador en el puente. El jugador que está más adelante se convierte en el primer jugador y obtiene el dado blanco. Lazos rotos por quién está en la cima."
-  },
-  "tileTypes": {
-    "sidenav": "Tipos de azulejos",
-    "heading": "Los diferentes tipos de baldosas",
-    "columns": ["Azulejo", "Tipo", "Lo que hace"],
-    "tiles": [
-      { "color": "Azul", "dotClass": "dot-blue", "type": "Embarcaciones", "desc": "Recoja todos los productos de un depósito de su elección y luego avance 1 en el puente." },
-      { "color": "Verde claro", "dotClass": "dot-lgreen", "type": "Ganado", "desc": "Puntuación VP por animal mostrado. También emparejar animales que ya están en ese puntaje de pasto nuevamente." },
-      { "color": "Beige", "dotClass": "dot-beige", "type": "Edificios", "desc": "Desencadena un efecto especial inmediato (ver más abajo). Uno de cada tipo por ciudad." },
-      { "color": "Verde Oscuro", "dotClass": "dot-dgreen", "type": "Castillos", "desc": "Inmediatamente tome una acción extra de cualquier tipo." },
-      { "color": "Gris", "dotClass": "dot-gray", "type": "Minas", "desc": "Sin efecto inmediato. Gane 1 plata por mina al final de cada fase." },
-      { "color": "Amarillo", "dotClass": "dot-yellow", "type": "Monasterios", "desc": "Capacidad continua o bonificación de fin de juego (ver más abajo)." }
-    ]
-  },
-  "buildings": {
-    "sidenav": "Edificios",
-    "heading": "Edificios",
-    "subtitle": "(Azulejos beige)",
-    "intro": "Cuando se coloca, el efecto se activa inmediatamente:",
-    "columns": ["Edificio", "Efecto inmediato"],
-    "items": [
-      { "icon": "🏪", "name": "Mercado", "effect": "Tome una loseta de ganado o nave de cualquier depósito → colóquela en un espacio clave" },
-      { "icon": "🪚", "name": "Taller de carpintero", "effect": "Tome cualquier baldosa de construcción de un depósito → colóquela en un espacio clave" },
-      { "icon": "⛪", "name": "Iglesia", "effect": "Tome una mina, monasterio o castillo de cualquier depósito → colóquese en un espacio clave" },
-      { "icon": "🏬", "name": "Almacén", "effect": "Vender un tipo de productos de su ducado" },
-      { "icon": "🏨", "name": "Pensión", "effect": "Tome 4 fichas de trabajador" },
-      { "icon": "🏦", "name": "Banco", "effect": "Tome 2 monedas de plata" },
-      { "icon": "🏛️", "name": "Ayuntamiento", "effect": "Coloque una baldosa adicional de cualquier color de su almacenamiento" },
-      { "icon": "🗼", "name": "Atalaya", "effect": "Puntuar 4 VP inmediatamente" }
-    ]
-  },
-  "monasteries": {
-    "sidenav": "Monasterios",
-    "heading": "Monasterios",
-    "subtitle": "(Azulejos amarillos)",
-    "intro": "Cada monasterio está numerado y otorga un beneficio único.",
-    "ongoingHeading": "Capacidades continuas",
-    "ongoing": [
-      { "num": "#1", "text": "Se permiten tipos de edificios duplicados en la misma ciudad." },
-      { "num": "#2", "text": "Obtenga un trabajador (+ plata) por mina al final de la fase." },
-      { "num": "#3", "text": "Gane 2 de plata en lugar de 1 al vender productos." },
-      { "num": "#4", "text": "Gane un trabajador cuando venda productos." },
-      { "num": "#5", "text": "Cuando coloque un barco, también agarre los productos de un depósito adyacente." },
-      { "num": "#6", "text": "Gasta 2 trabajadores (no plata) para comprar azulejos; compre en cualquier depósito." },
-      { "num": "#7", "text": "+1 VP por azulejo animal que puntúa al colocar ganado." },
-      { "num": "#8", "text": "Los trabajadores ajustan los dados en ±2 en lugar de ±1." },
-      { "num": "#9–12", "text": "Ajuste libre de ±1 troquel al colocar ciertos tipos de baldosas." },
-      { "num": "#13", "text": "Cuando tome trabajadores, también gane 1 plata." },
-      { "num": "#14", "text": "Cuando tome trabajadores, obtenga 4 en lugar de 2." }
-    ],
-    "endGameHeading": "Puntuación al final del juego",
-    "endGame": [
-      { "num": "#15", "text": "2 VP por diferentes tipos de productos vendidos." },
-      { "num": "#16–23, 29", "text": "4 VP por tipo de edificio específico colocado." },
-      { "num": "#24", "text": "4 VP por diferente tipo de ganado en el ducado." },
-      { "num": "#25", "text": "1 VP por azulejo de productos vendidos durante el juego." },
-      { "num": "#26", "text": "3 VP por ficha extra recolectada." }
-    ]
-  },
-  "endOfGame": {
-    "sidenav": "Fin del juego",
-    "heading": "Fin del juego",
-    "intro": "Después de la última ronda de la Fase E, haga la puntuación final:",
-    "bonusHeading": "Puntos de bonificación finales",
-    "bonuses": [
-      "<strong>1 VP</strong> por cada ficha de bienes no vendidos restante",
-      "<strong>1 VP</strong> por moneda de plata",
-      "<strong>1 VP</strong> por 2 tokens de trabajador",
-      "Resolver los efectos del monasterio al final del juego"
-    ],
-    "winner": "<strong>La mayoría de los VP ganan.</strong> <br/>Rompedesempate 1: Menos espacios vacíos en su ducado. <br/>Tiebreaker 2: Más atrás en el puente."
-  }
+    "app": {
+        "title": "Los castillos de Borgoña",
+        "subtitle": "Una guía de juego en lenguaje simple",
+        "footer": "🏰 Los castillos de Borgoña — Guía de juegos 🏰"
+    },
+    "overview": {
+        "heading": "Lo que está tratando de hacer",
+        "body": "Tiene un tablero de juego personal, su ducado, una cuadrícula de espacios hexagonal de colores. Cada turno tira dos dados y los usa para recoger azulejos o colocarlos en su ducado. Diferentes mosaicos hacen cosas diferentes. Gana puntos llenando áreas y vendiendo productos. La mayoría de los puntos gana.",
+        "sidenav": "Descripción general"
+    },
+    "setup": {
+        "sidenav": "Configuración",
+        "heading": "Configuración del juego",
+        "intro": "Coloque el tablero de juego compartido en el centro de la mesa.",
+        "playerGetsHeading": "Cada jugador obtiene",
+        "playerGets": [
+            "Una junta de ducado personal",
+            "Estos pueden ser todos idénticos (#1 o #2) o seleccionados al azar",
+            "Una tarjeta de referencia",
+            "2 dados, 2 marcadores de jugador, 1 marcador de puntuación (en su color)",
+            "1 azulejo de castillo → colocado en el centro de su ducado",
+            "3 baldosas de productos → colocadas en el área de almacenamiento inferior derecha",
+            "1 moneda de plata → colocada en la parte superior derecha"
+        ],
+        "sharedBoardHeading": "En la Junta Compartida",
+        "sharedBoard": [
+            "Ordene las baldosas hexagonal de colores por color, manténgalas boca abajo",
+            "Desplace los azulejos de los productos boca abajo; coloque 5 en cada espacio A—E",
+            "Coloque mosaicos adicionales en puntos de color coincidentes (uno grande en la parte superior)"
+        ],
+        "firstPlayerHeading": "Determinar el primer jugador",
+        "firstPlayerRoll": "Todo el mundo saca un dado, lo más alto va primero. El primer jugador obtiene {workers1}, el segundo obtiene {workers2}, el tercero obtiene {workers3}, y así sucesivamente. El primer jugador también recibe el especial {whiteDie}.",
+        "bridgeNote": "Coloque marcadores en la pista de puntuación y en la pista de orden de giro (llamada\"el puente\")."
+    },
+    "gameFlow": {
+        "sidenav": "Flujo del juego",
+        "heading": "Cómo fluye el juego",
+        "intro": "El juego se juega en <strong>5 fases</strong> (A a E), cada una con <strong>5 rondas</strong>, <strong>25 rondas en total</strong>.",
+        "phases": ["A", "B", "C", "D", "E"],
+        "roundsLabel": "Rondas",
+        "startHeading": "Inicio de cada fase",
+        "startSteps": [
+            "Retire los mosaicos sobrantes del tablero compartido",
+            "Coloque los mosaicos de productos nuevos en el espacio de fase correspondiente",
+            "Llene los espacios del depósito con azulejos de colores boca arriba de pilas coincidentes",
+            "Rellene los espacios negros centrales con mosaicos aleatorios con respaldo negro (boca arriba)"
+        ],
+        "endHeading": "Fin de cada fase",
+        "endSteps": [
+            "Cada jugador gana 1 moneda de plata por ficha de mina en su ducado",
+            "Compruebe los mosaicos del monasterio para ver si hay efectos de final de fase"
+        ],
+        "roundHeading": "Cada ronda",
+        "roundDesc": "Todos los jugadores tiran sus dos dados. El primer jugador también tira el dado blanco: determina qué depósito recibe una nueva ficha de productos. Luego, en orden de turnos, cada jugador toma su turno."
+    },
+    "yourTurn": {
+        "sidenav": "Su turno",
+        "heading": "Lo que hace en su turno",
+        "intro": "Obtiene <strong>dos acciones</strong>: una por cada día. Para cada uno, elija uno:",
+        "actions": [
+            {
+                "icon": "🫳",
+                "title": "Recoja un azulejo",
+                "desc": "Tome un azulejo del depósito que coincida con su número de dado. Almacenarlo en su ducado (máximo 3). Si está lleno, deseche uno primero."
+            },
+            {
+                "icon": "🧩",
+                "title": "Coloque un azulejo",
+                "desc": "Mueva un azulejo del almacenamiento a un espacio vacío correspondiente en su ducado. Debe coincidir con el número de troquel, el color del azulejo y estar adyacente a un azulejo existente."
+            },
+            {
+                "icon": "💰",
+                "title": "Vender bienes",
+                "desc": "Vende una pila de productos del mismo tipo. Gane 1 plata +VP igual a (número de jugadores x fichas vendidas)."
+            },
+            {
+                "icon": "👷",
+                "title": "Tome a los trabajadores",
+                "desc": "Obtenga 2 fichas de trabajador del suministro."
+            }
+        ],
+        "buyCenter": "<strong>⑤ Compre en el centro (acción adicional):</strong> Una vez por turno, gaste 2 monedas de plata para tomar una baldosa del área central negra. Esto <em>se suma</em> a sus dos acciones normales.",
+        "workerTip": "<strong>Los trabajadores</strong> le permiten ajustar un dado en ± 1 (envoltura: 6 ↔ 1). Gaste un trabajador por ajuste. Apílelos para turnos más grandes."
+    },
+    "scoring": {
+        "sidenav": "Puntuación",
+        "heading": "Cómo anotar puntos",
+        "areasHeading": "🏘️ Completar áreas",
+        "areasDesc": "Cuando llena todos los espacios en un grupo conectado del mismo color, puntajes basados en:",
+        "areasCriteria": [
+            "<strong>Tamaño del área</strong>: más espacios = más puntos (consulte la tabla a bordo)",
+            "<strong>Fase actual</strong>: las fases anteriores dan puntos de bonificación"
+        ],
+        "colorHeading": "🎨 Completar un color",
+        "colorDesc": "Llene cada espacio de un solo color en todo su ducado → recoja la ficha de bonificación correspondiente y anote sus puntos.",
+        "bridgeHeading": "🌉 Orden de giro (\"El puente\")",
+        "bridgeDesc": "Ciertas acciones hacen avanzar su marcador en el puente. El jugador que está más adelante se convierte en el primer jugador y obtiene el dado blanco. Lazos rotos por quién está en la cima."
+    },
+    "tileTypes": {
+        "sidenav": "Tipos de azulejos",
+        "heading": "Los diferentes tipos de baldosas",
+        "columns": ["Azulejo", "Tipo", "Lo que hace"],
+        "tiles": [
+            {
+                "color": "Azul",
+                "dotClass": "dot-blue",
+                "type": "Embarcaciones",
+                "desc": "Recoja todos los productos de un depósito de su elección y luego avance 1 en el puente."
+            },
+            {
+                "color": "Verde claro",
+                "dotClass": "dot-lgreen",
+                "type": "Ganado",
+                "desc": "Puntuación VP por animal mostrado. También emparejar animales que ya están en ese puntaje de pasto nuevamente."
+            },
+            {
+                "color": "Beige",
+                "dotClass": "dot-beige",
+                "type": "Edificios",
+                "desc": "Desencadena un efecto especial inmediato (ver más abajo). Uno de cada tipo por ciudad."
+            },
+            {
+                "color": "Verde Oscuro",
+                "dotClass": "dot-dgreen",
+                "type": "Castillos",
+                "desc": "Inmediatamente tome una acción extra de cualquier tipo."
+            },
+            {
+                "color": "Gris",
+                "dotClass": "dot-gray",
+                "type": "Minas",
+                "desc": "Sin efecto inmediato. Gane 1 plata por mina al final de cada fase."
+            },
+            {
+                "color": "Amarillo",
+                "dotClass": "dot-yellow",
+                "type": "Monasterios",
+                "desc": "Capacidad continua o bonificación de fin de juego (ver más abajo)."
+            }
+        ]
+    },
+    "buildings": {
+        "sidenav": "Edificios",
+        "heading": "Edificios",
+        "subtitle": "(Azulejos beige)",
+        "intro": "Cuando se coloca, el efecto se activa inmediatamente:",
+        "columns": ["Edificio", "Efecto inmediato"],
+        "items": [
+            {
+                "icon": "🏪",
+                "name": "Mercado",
+                "effect": "Tome una loseta de ganado o nave de cualquier depósito → colóquela en un espacio clave"
+            },
+            {
+                "icon": "🪚",
+                "name": "Taller de carpintero",
+                "effect": "Tome cualquier baldosa de construcción de un depósito → colóquela en un espacio clave"
+            },
+            {
+                "icon": "⛪",
+                "name": "Iglesia",
+                "effect": "Tome una mina, monasterio o castillo de cualquier depósito → colóquese en un espacio clave"
+            },
+            {
+                "icon": "🏬",
+                "name": "Almacén",
+                "effect": "Vender un tipo de productos de su ducado"
+            },
+            { "icon": "🏨", "name": "Pensión", "effect": "Tome 4 fichas de trabajador" },
+            { "icon": "🏦", "name": "Banco", "effect": "Tome 2 monedas de plata" },
+            {
+                "icon": "🏛️",
+                "name": "Ayuntamiento",
+                "effect": "Coloque una baldosa adicional de cualquier color de su almacenamiento"
+            },
+            { "icon": "🗼", "name": "Atalaya", "effect": "Puntuar 4 VP inmediatamente" }
+        ]
+    },
+    "monasteries": {
+        "sidenav": "Monasterios",
+        "heading": "Monasterios",
+        "subtitle": "(Azulejos amarillos)",
+        "intro": "Cada monasterio está numerado y otorga un beneficio único.",
+        "ongoingHeading": "Capacidades continuas",
+        "ongoing": [
+            {
+                "num": "#1",
+                "text": "Se permiten tipos de edificios duplicados en la misma ciudad."
+            },
+            {
+                "num": "#2",
+                "text": "Obtenga un trabajador (+ plata) por mina al final de la fase."
+            },
+            { "num": "#3", "text": "Gane 2 de plata en lugar de 1 al vender productos." },
+            { "num": "#4", "text": "Gane un trabajador cuando venda productos." },
+            {
+                "num": "#5",
+                "text": "Cuando coloque un barco, también agarre los productos de un depósito adyacente."
+            },
+            {
+                "num": "#6",
+                "text": "Gasta 2 trabajadores (no plata) para comprar azulejos; compre en cualquier depósito."
+            },
+            { "num": "#7", "text": "+1 VP por azulejo animal que puntúa al colocar ganado." },
+            { "num": "#8", "text": "Los trabajadores ajustan los dados en ±2 en lugar de ±1." },
+            {
+                "num": "#9–12",
+                "text": "Ajuste libre de ±1 troquel al colocar ciertos tipos de baldosas."
+            },
+            { "num": "#13", "text": "Cuando tome trabajadores, también gane 1 plata." },
+            { "num": "#14", "text": "Cuando tome trabajadores, obtenga 4 en lugar de 2." }
+        ],
+        "endGameHeading": "Puntuación al final del juego",
+        "endGame": [
+            { "num": "#15", "text": "2 VP por diferentes tipos de productos vendidos." },
+            { "num": "#16–23, 29", "text": "4 VP por tipo de edificio específico colocado." },
+            { "num": "#24", "text": "4 VP por diferente tipo de ganado en el ducado." },
+            { "num": "#25", "text": "1 VP por azulejo de productos vendidos durante el juego." },
+            { "num": "#26", "text": "3 VP por ficha extra recolectada." }
+        ]
+    },
+    "endOfGame": {
+        "sidenav": "Fin del juego",
+        "heading": "Fin del juego",
+        "intro": "Después de la última ronda de la Fase E, haga la puntuación final:",
+        "bonusHeading": "Puntos de bonificación finales",
+        "bonuses": [
+            "<strong>1 VP</strong> por cada ficha de bienes no vendidos restante",
+            "<strong>1 VP</strong> por moneda de plata",
+            "<strong>1 VP</strong> por 2 tokens de trabajador",
+            "Resolver los efectos del monasterio al final del juego"
+        ],
+        "winner": "<strong>La mayoría de los VP ganan.</strong> <br/>Rompedesempate 1: Menos espacios vacíos en su ducado. <br/>Tiebreaker 2: Más atrás en el puente."
+    }
 }

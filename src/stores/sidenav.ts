@@ -1,19 +1,15 @@
-import { NavGroup } from "@/components/SideNav";
-import i18n from "@/i18n";
-import { games } from "@/utils/constants";
-import { produce } from "immer";
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
-
+import type { NavGroup } from '@/components/SideNav';
+import { create } from 'zustand';
 
 interface SideNavStoreStage {
     groups: NavGroup[];
     setGroups: (groups: NavGroup[]) => void;
 }
 
-export const useSideNavStore = create<SideNavStoreStage>((set) => ({
+export const useSideNavStore = create<SideNavStoreStage>(set => ({
     groups: [],
-    setGroups: (groups) => set({
-        groups,
-    })
-}))
+    setGroups: groups =>
+        set({
+            groups,
+        }),
+}));

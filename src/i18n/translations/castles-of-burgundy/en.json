@@ -1,155 +1,227 @@
 {
-  "app": {
-    "title": "The Castles of Burgundy",
-    "subtitle": "A Plain-Language Play Guide",
-    "footer": "🏰 The Castles of Burgundy — Play Guide 🏰"
-  },
-  "overview": {
-    "heading": "What You're Trying to Do",
-    "body": "You have a personal game board — your duchy — a grid of colored hex spaces. Each turn you roll two dice and use them to pick up tiles or place them onto your duchy. Different tiles do different things. You earn points by filling areas and selling goods. Most points wins.",
-    "sidenav": "Overview"
-  },
-  "setup": {
-    "sidenav": "Setup",
-    "heading": "Setting Up the Game",
-    "intro": "Place the shared game board in the center of the table.",
-    "playerGetsHeading": "Each Player Gets",
-    "playerGets": [
-      "A personal duchy board",
-      "These can either be all identical (#1 or #2) or randomly selected",
-      "A reference card",
-      "2 dice, 2 player markers, 1 scoring marker (in their color)",
-      "1 castle tile → placed in the center of their duchy",
-      "3 goods tiles → placed in the bottom-right storage area",
-      "1 silver coin → placed in the top-right"
-    ],
-    "sharedBoardHeading": "On the Shared Board",
-    "sharedBoard": [
-      "Sort colored hex tiles by color, keep them face-down",
-      "Shuffle goods tiles face-down; place 5 on each A-E space",
-      "Place bonus tiles on matching color spots (large one on top)"
-    ],
-    "firstPlayerHeading": "Determining First Player",
-    "firstPlayerRoll": "Everyone rolls a die — highest goes first. The first player gets <strong>1 worker</strong>, second gets <strong>2 workers</strong>, third gets <strong>3 workers</strong>, and so on. The first player also receives the special <strong>white die</strong>.",
-    "bridgeNote": "Place markers on the scoring track and the turn-order track (called <em>\"the bridge\"</em>)."
-  },
-  "gameFlow": {
-    "sidenav": "Game Flow",
-    "heading": "How the Game Flows",
-    "intro": "The game is played across <strong>5 phases</strong> (A through E), each with  <strong>5 rounds</strong> — <strong>25 rounds total</strong>.",
-    "phases": ["A", "B", "C", "D", "E"],
-    "roundsLabel": "Rounds",
-    "startHeading": "Start of Each Phase",
-    "startSteps": [
-      "Remove leftover tiles from the shared board",
-      "Place new goods tiles on the matching phase space",
-      "Fill depot spaces with face-up colored tiles from matching stacks",
-      "Fill center black spaces with random black-backed tiles (face-up)"
-    ],
-    "endHeading": "End of Each Phase",
-    "endSteps": [
-      "Each player earns 1 silver coin per mine tile in their duchy",
-      "Check monastery tiles for end-of-phase effects"
-    ],
-    "roundHeading": "Each Round",
-    "roundDesc": "All players roll their two dice. The first player also rolls the white die — it determines which depot gets a new goods tile. Then, in turn order, each player takes their turn."
-  },
-  "yourTurn": {
-    "sidenav": "Your Turn",
-    "heading": "What You Do on Your Turn",
-    "intro": "You get <strong>two actions</strong> — one per die. For each, choose one:",
-    "actions": [
-      { "icon": "🫳", "title": "Pick Up a Tile", "desc": "Take a tile from the depot matching your die number. Store it on your duchy (max 3). If full, discard one first." },
-      { "icon": "🧩", "title": "Place a Tile", "desc": "Move a tile from storage onto a matching empty space in your duchy. Must match die number, tile color, and be adjacent to an existing tile." },
-      { "icon": "💰", "title": "Sell Goods", "desc": "Sell a stack of same-type goods. Earn 1 silver + VP equal to (number of players x tiles sold)." },
-      { "icon": "👷", "title": "Take Workers", "desc": "Gain 2 worker tokens from the supply." }
-    ],
-    "buyCenter": "<strong>⑤ Buy from the Center (bonus action):</strong> Once per turn, spend 2 silver to take a tile from the black center area. This is <em>in addition</em> to your two normal actions.",
-    "workerTip": "<strong>Workers</strong> let you adjust a die by ±1 (wrapping: 6↔1). Spend one worker per adjustment. Stack them for bigger shifts."
-  },
-  "scoring": {
-    "sidenav": "Scoring",
-    "heading": "How You Score Points",
-    "areasHeading": "🏘️ Completing Areas",
-    "areasDesc": "When you fill every space in a connected same-colored group, you score based on:",
-    "areasCriteria": [
-      "<strong>Size of the area</strong> — more spaces = more points (see chart on board)",
-      "<strong>Current phase</strong> — earlier phases give bonus points"
-    ],
-    "colorHeading": "🎨 Completing a Color",
-    "colorDesc": "Fill every space of a single color across your entire duchy → collect the matching bonus tile and score its points.",
-    "bridgeHeading": "🌉 Turn Order (\"The Bridge\")",
-    "bridgeDesc": "Certain actions advance your marker on the bridge. The player furthest ahead becomes first player and gets the white die. Ties broken by who's on top."
-  },
-  "tileTypes": {
-    "sidenav": "Tile Types",
-    "heading": "The Different Tile Types",
-    "columns": ["Tile", "Type", "What It Does"],
-    "tiles": [
-      { "color": "Blue", "dotClass": "dot-blue", "type": "Ships", "desc": "Collect all goods from one depot of your choice, then advance 1 on the bridge." },
-      { "color": "Light Green", "dotClass": "dot-lgreen", "type": "Livestock", "desc": "Score VP per animal shown. Matching animals already in that pasture score again too." },
-      { "color": "Beige", "dotClass": "dot-beige", "type": "Buildings", "desc": "Triggers an immediate special effect (see below). One of each type per town." },
-      { "color": "Dark Green", "dotClass": "dot-dgreen", "type": "Castles", "desc": "Immediately take one extra action of any type." },
-      { "color": "Gray", "dotClass": "dot-gray", "type": "Mines", "desc": "No immediate effect. Earn 1 silver per mine at end of every phase." },
-      { "color": "Yellow", "dotClass": "dot-yellow", "type": "Monasteries", "desc": "Ongoing ability or end-of-game bonus (see below)." }
-    ]
-  },
-  "buildings": {
-    "sidenav": "Buildings",
-    "heading": "Buildings",
-    "subtitle": "(Beige Tiles)",
-    "intro": "When placed, the effect triggers immediately:",
-    "columns": ["Building", "Immediate Effect"],
-    "items": [
-      { "icon": "🏪", "name": "Market", "effect": "Take a livestock or ship tile from any depot → place on a key space" },
-      { "icon": "🪚", "name": "Carpenter's Workshop", "effect": "Take any building tile from a depot → place on a key space" },
-      { "icon": "⛪", "name": "Church", "effect": "Take a mine, monastery, or castle from any depot → place on a key space" },
-      { "icon": "🏬", "name": "Warehouse", "effect": "Sell one type of goods from your duchy" },
-      { "icon": "🏨", "name": "Boarding House", "effect": "Take 4 worker tokens" },
-      { "icon": "🏦", "name": "Bank", "effect": "Take 2 silver coins" },
-      { "icon": "🏛️", "name": "Town Hall", "effect": "Place one additional tile of any color from your storage" },
-      { "icon": "🗼", "name": "Watchtower", "effect": "Score 4 VP immediately" }
-    ]
-  },
-  "monasteries": {
-    "sidenav": "Monasteries",
-    "heading": "Monasteries",
-    "subtitle": "(Yellow Tiles)",
-    "intro": "Each monastery is numbered and grants a unique benefit.",
-    "ongoingHeading": "Ongoing Abilities",
-    "ongoing": [
-      { "num": "#1", "text": "Duplicate building types allowed in the same town." },
-      { "num": "#2", "text": "Gain a worker (+ silver) per mine at end of phase." },
-      { "num": "#3", "text": "Earn 2 silver instead of 1 when selling goods." },
-      { "num": "#4", "text": "Gain a worker when you sell goods." },
-      { "num": "#5", "text": "When placing a ship, also grab goods from one adjacent depot." },
-      { "num": "#6", "text": "Spend 2 workers (not silver) to buy tiles; buy from any depot." },
-      { "num": "#7", "text": "+1 VP per animal tile that scores when placing livestock." },
-      { "num": "#8", "text": "Workers adjust dice by ±2 instead of ±1." },
-      { "num": "#9-12", "text": "Free ±1 die adjustment when placing certain tile types." },
-      { "num": "#13", "text": "When taking workers, also gain 1 silver." },
-      { "num": "#14", "text": "When taking workers, get 4 instead of 2." }
-    ],
-    "endGameHeading": "End-of-Game Scoring",
-    "endGame": [
-      { "num": "#15", "text": "2 VP per different goods type sold." },
-      { "num": "#16-23, 29", "text": "4 VP per specific building type placed." },
-      { "num": "#24", "text": "4 VP per different livestock type in duchy." },
-      { "num": "#25", "text": "1 VP per goods tile sold during the game." },
-      { "num": "#26", "text": "3 VP per bonus tile collected." }
-    ]
-  },
-  "endOfGame": {
-    "sidenav": "End of Game",
-    "heading": "End of the Game",
-    "intro": "After the last round of Phase E, do final scoring:",
-    "bonusHeading": "Final Bonus Points",
-    "bonuses": [
-      "<strong>1 VP</strong> per unsold goods tile remaining",
-      "<strong>1 VP</strong> per silver coin",
-      "<strong>1 VP</strong> per 2 worker tokens",
-      "Resolve end-of-game monastery effects"
-    ],
-    "winner": "<strong>Most VP wins.</strong><br/>Tiebreaker 1: Fewer empty spaces on your duchy.<br/>Tiebreaker 2: Further behind on the bridge."
-  }
+    "app": {
+        "title": "The Castles of Burgundy",
+        "subtitle": "A Plain-Language Play Guide",
+        "footer": "🏰 The Castles of Burgundy — Play Guide 🏰"
+    },
+    "overview": {
+        "heading": "What You're Trying to Do",
+        "body": "You have a personal game board — your duchy — a grid of colored hex spaces. Each turn you roll two dice and use them to pick up tiles or place them onto your duchy. Different tiles do different things. You earn points by filling areas and selling goods. Most points wins.",
+        "sidenav": "Overview"
+    },
+    "setup": {
+        "sidenav": "Setup",
+        "heading": "Setting Up the Game",
+        "intro": "Place the shared game board in the center of the table.",
+        "playerGetsHeading": "Each Player Gets",
+        "playerGets": [
+            "A personal duchy board",
+            "These can either be all identical (#1 or #2) or randomly selected",
+            "A reference card",
+            "2 dice, 2 player markers, 1 scoring marker (in their color)",
+            "1 castle tile → placed in the center of their duchy",
+            "3 goods tiles → placed in the bottom-right storage area",
+            "1 silver coin → placed in the top-right"
+        ],
+        "sharedBoardHeading": "On the Shared Board",
+        "sharedBoard": [
+            "Sort colored hex tiles by color, keep them face-down",
+            "Shuffle goods tiles face-down; place 5 on each A-E space",
+            "Place bonus tiles on matching color spots (large one on top)"
+        ],
+        "firstPlayerHeading": "Determining First Player",
+        "firstPlayerRoll": "Everyone rolls a die — highest goes first. The first player gets <strong>1 worker</strong>, second gets <strong>2 workers</strong>, third gets <strong>3 workers</strong>, and so on. The first player also receives the special <strong>white die</strong>.",
+        "bridgeNote": "Place markers on the scoring track and the turn-order track (called <em>\"the bridge\"</em>)."
+    },
+    "gameFlow": {
+        "sidenav": "Game Flow",
+        "heading": "How the Game Flows",
+        "intro": "The game is played across <strong>5 phases</strong> (A through E), each with  <strong>5 rounds</strong> — <strong>25 rounds total</strong>.",
+        "phases": ["A", "B", "C", "D", "E"],
+        "roundsLabel": "Rounds",
+        "startHeading": "Start of Each Phase",
+        "startSteps": [
+            "Remove leftover tiles from the shared board",
+            "Place new goods tiles on the matching phase space",
+            "Fill depot spaces with face-up colored tiles from matching stacks",
+            "Fill center black spaces with random black-backed tiles (face-up)"
+        ],
+        "endHeading": "End of Each Phase",
+        "endSteps": [
+            "Each player earns 1 silver coin per mine tile in their duchy",
+            "Check monastery tiles for end-of-phase effects"
+        ],
+        "roundHeading": "Each Round",
+        "roundDesc": "All players roll their two dice. The first player also rolls the white die — it determines which depot gets a new goods tile. Then, in turn order, each player takes their turn."
+    },
+    "yourTurn": {
+        "sidenav": "Your Turn",
+        "heading": "What You Do on Your Turn",
+        "intro": "You get <strong>two actions</strong> — one per die. For each, choose one:",
+        "actions": [
+            {
+                "icon": "🫳",
+                "title": "Pick Up a Tile",
+                "desc": "Take a tile from the depot matching your die number. Store it on your duchy (max 3). If full, discard one first."
+            },
+            {
+                "icon": "🧩",
+                "title": "Place a Tile",
+                "desc": "Move a tile from storage onto a matching empty space in your duchy. Must match die number, tile color, and be adjacent to an existing tile."
+            },
+            {
+                "icon": "💰",
+                "title": "Sell Goods",
+                "desc": "Sell a stack of same-type goods. Earn 1 silver + VP equal to (number of players x tiles sold)."
+            },
+            {
+                "icon": "👷",
+                "title": "Take Workers",
+                "desc": "Gain 2 worker tokens from the supply."
+            }
+        ],
+        "buyCenter": "<strong>⑤ Buy from the Center (bonus action):</strong> Once per turn, spend 2 silver to take a tile from the black center area. This is <em>in addition</em> to your two normal actions.",
+        "workerTip": "<strong>Workers</strong> let you adjust a die by ±1 (wrapping: 6↔1). Spend one worker per adjustment. Stack them for bigger shifts."
+    },
+    "scoring": {
+        "sidenav": "Scoring",
+        "heading": "How You Score Points",
+        "areasHeading": "🏘️ Completing Areas",
+        "areasDesc": "When you fill every space in a connected same-colored group, you score based on:",
+        "areasCriteria": [
+            "<strong>Size of the area</strong> — more spaces = more points (see chart on board)",
+            "<strong>Current phase</strong> — earlier phases give bonus points"
+        ],
+        "colorHeading": "🎨 Completing a Color",
+        "colorDesc": "Fill every space of a single color across your entire duchy → collect the matching bonus tile and score its points.",
+        "bridgeHeading": "🌉 Turn Order (\"The Bridge\")",
+        "bridgeDesc": "Certain actions advance your marker on the bridge. The player furthest ahead becomes first player and gets the white die. Ties broken by who's on top."
+    },
+    "tileTypes": {
+        "sidenav": "Tile Types",
+        "heading": "The Different Tile Types",
+        "columns": ["Tile", "Type", "What It Does"],
+        "tiles": [
+            {
+                "color": "Blue",
+                "dotClass": "dot-blue",
+                "type": "Ships",
+                "desc": "Collect all goods from one depot of your choice, then advance 1 on the bridge."
+            },
+            {
+                "color": "Light Green",
+                "dotClass": "dot-lgreen",
+                "type": "Livestock",
+                "desc": "Score VP per animal shown. Matching animals already in that pasture score again too."
+            },
+            {
+                "color": "Beige",
+                "dotClass": "dot-beige",
+                "type": "Buildings",
+                "desc": "Triggers an immediate special effect (see below). One of each type per town."
+            },
+            {
+                "color": "Dark Green",
+                "dotClass": "dot-dgreen",
+                "type": "Castles",
+                "desc": "Immediately take one extra action of any type."
+            },
+            {
+                "color": "Gray",
+                "dotClass": "dot-gray",
+                "type": "Mines",
+                "desc": "No immediate effect. Earn 1 silver per mine at end of every phase."
+            },
+            {
+                "color": "Yellow",
+                "dotClass": "dot-yellow",
+                "type": "Monasteries",
+                "desc": "Ongoing ability or end-of-game bonus (see below)."
+            }
+        ]
+    },
+    "buildings": {
+        "sidenav": "Buildings",
+        "heading": "Buildings",
+        "subtitle": "(Beige Tiles)",
+        "intro": "When placed, the effect triggers immediately:",
+        "columns": ["Building", "Immediate Effect"],
+        "items": [
+            {
+                "icon": "🏪",
+                "name": "Market",
+                "effect": "Take a livestock or ship tile from any depot → place on a key space"
+            },
+            {
+                "icon": "🪚",
+                "name": "Carpenter's Workshop",
+                "effect": "Take any building tile from a depot → place on a key space"
+            },
+            {
+                "icon": "⛪",
+                "name": "Church",
+                "effect": "Take a mine, monastery, or castle from any depot → place on a key space"
+            },
+            {
+                "icon": "🏬",
+                "name": "Warehouse",
+                "effect": "Sell one type of goods from your duchy"
+            },
+            { "icon": "🏨", "name": "Boarding House", "effect": "Take 4 worker tokens" },
+            { "icon": "🏦", "name": "Bank", "effect": "Take 2 silver coins" },
+            {
+                "icon": "🏛️",
+                "name": "Town Hall",
+                "effect": "Place one additional tile of any color from your storage"
+            },
+            { "icon": "🗼", "name": "Watchtower", "effect": "Score 4 VP immediately" }
+        ]
+    },
+    "monasteries": {
+        "sidenav": "Monasteries",
+        "heading": "Monasteries",
+        "subtitle": "(Yellow Tiles)",
+        "intro": "Each monastery is numbered and grants a unique benefit.",
+        "ongoingHeading": "Ongoing Abilities",
+        "ongoing": [
+            { "num": "#1", "text": "Duplicate building types allowed in the same town." },
+            { "num": "#2", "text": "Gain a worker (+ silver) per mine at end of phase." },
+            { "num": "#3", "text": "Earn 2 silver instead of 1 when selling goods." },
+            { "num": "#4", "text": "Gain a worker when you sell goods." },
+            {
+                "num": "#5",
+                "text": "When placing a ship, also grab goods from one adjacent depot."
+            },
+            {
+                "num": "#6",
+                "text": "Spend 2 workers (not silver) to buy tiles; buy from any depot."
+            },
+            { "num": "#7", "text": "+1 VP per animal tile that scores when placing livestock." },
+            { "num": "#8", "text": "Workers adjust dice by ±2 instead of ±1." },
+            { "num": "#9-12", "text": "Free ±1 die adjustment when placing certain tile types." },
+            { "num": "#13", "text": "When taking workers, also gain 1 silver." },
+            { "num": "#14", "text": "When taking workers, get 4 instead of 2." }
+        ],
+        "endGameHeading": "End-of-Game Scoring",
+        "endGame": [
+            { "num": "#15", "text": "2 VP per different goods type sold." },
+            { "num": "#16-23, 29", "text": "4 VP per specific building type placed." },
+            { "num": "#24", "text": "4 VP per different livestock type in duchy." },
+            { "num": "#25", "text": "1 VP per goods tile sold during the game." },
+            { "num": "#26", "text": "3 VP per bonus tile collected." }
+        ]
+    },
+    "endOfGame": {
+        "sidenav": "End of Game",
+        "heading": "End of the Game",
+        "intro": "After the last round of Phase E, do final scoring:",
+        "bonusHeading": "Final Bonus Points",
+        "bonuses": [
+            "<strong>1 VP</strong> per unsold goods tile remaining",
+            "<strong>1 VP</strong> per silver coin",
+            "<strong>1 VP</strong> per 2 worker tokens",
+            "Resolve end-of-game monastery effects"
+        ],
+        "winner": "<strong>Most VP wins.</strong><br/>Tiebreaker 1: Fewer empty spaces on your duchy.<br/>Tiebreaker 2: Further behind on the bridge."
+    }
 }

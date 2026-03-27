@@ -3,10 +3,9 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import i18n, { type Resource } from 'i18next';
 
 // Eagerly import all translation JSON files under translations/<game>/<lang>.json
-const translationModules = import.meta.glob<Record<string, unknown>>(
-    './translations/*/*.json',
-    { eager: true },
-);
+const translationModules = import.meta.glob<Record<string, unknown>>('./translations/*/*.json', {
+    eager: true,
+});
 
 // Build the resources object: { [lang]: { [namespace]: translations } }
 const resources: Resource = {};
@@ -20,13 +19,15 @@ for (const [path, mod] of Object.entries(translationModules)) {
 
     namespaces.add(namespace);
     resources[lang] ??= {};
-    resources[lang][namespace] = ((mod as { default?: unknown }).default ?? mod) as Record<string, string>;
+    resources[lang][namespace] = ((mod as { default?: unknown }).default ?? mod) as Record<
+        string,
+        string
+    >;
 }
 
 const ns = [...namespaces];
 
-i18n
-    .use(LanguageDetector)
+i18n.use(LanguageDetector)
     .use(initReactI18next)
     .init({
         resources,

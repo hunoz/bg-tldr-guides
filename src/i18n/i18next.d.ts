@@ -2,11 +2,11 @@ import type { CoBSchema, LocalizationSchema } from './translations/castles-of-bu
 import { CommonSchema } from './translations/common/schema';
 
 declare module 'i18next' {
-  interface CustomTypeOptions {
-    defaultNS: 'common';
-    resources: {
-      'castles-of-burgundy': CoBSchema;
-      common: CommonSchema;
-    };
-  }
+    interface CustomTypeOptions {
+        defaultNS: 'common';
+        resources: {
+            'castles-of-burgundy': CoBSchema;
+            'common': CommonSchema;
+        };
+    }
 }

@@ -6,425 +6,437 @@
 /* --- Scoped base typography --- */
 
 .cob {
-  position: absolute;
-  inset: 0;
-  overflow-y: auto;
-  background: #1a0f0a;
-  color: #3b2a1a;
-  font-family: 'Crimson Text', Georgia, serif;
-  font-size: 1.125rem;
-  line-height: 1.7;
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    background: #1a0f0a;
+    color: #3b2a1a;
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 1.125rem;
+    line-height: 1.7;
 }
 
 .cob p {
-  margin-bottom: 0.875rem;
-  color: #3b2a1a;
+    margin-bottom: 0.875rem;
+    color: #3b2a1a;
 }
 
 .cob h2 {
-  font-family: 'Cinzel', serif;
-  color: #5a2d0c;
-  font-size: 1.8rem;
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.625rem;
-  border-bottom: 0.125rem solid #c9a84c;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+    font-family: 'Cinzel', serif;
+    color: #5a2d0c;
+    font-size: 1.8rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.625rem;
+    border-bottom: 0.125rem solid #c9a84c;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .cob h2 .icon {
-  font-size: 1.6rem;
+    font-size: 1.6rem;
 }
 
 .cob h3 {
-  font-family: 'Cinzel', serif;
-  color: #7a4420;
-  font-size: 1.2rem;
-  margin: 1.25rem 0 0.625rem;
+    font-family: 'Cinzel', serif;
+    color: #7a4420;
+    font-size: 1.2rem;
+    margin: 1.25rem 0 0.625rem;
 }
 
 /* --- Lists --- */
 
 .cob ol,
 .cob ul {
-  margin: 0 0 1rem 1.5rem;
+    margin: 0 0 1rem 1.5rem;
 }
 
 .cob ul {
-  list-style: none;
+    list-style: none;
 }
 
 .cob ul > li::before {
-  content: '⚜ ';
-  color: #c9a84c;
-  margin-left: -1.5rem;
-  float: left;
+    content: '⚜ ';
+    color: #c9a84c;
+    margin-left: -1.5rem;
+    float: left;
 }
 
 .cob li {
-  margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 /* --- Layout --- */
 
 .cob .container {
-  max-width: 70rem;
-  margin: 0 auto;
-  padding: 0 1.25rem 3.75rem;
+    max-width: 70rem;
+    margin: 0 auto;
+    padding: 0 1.25rem 3.75rem;
 }
 
 /* --- Hero Banner --- */
 
 .cob .hero {
-  background: linear-gradient(135deg, #2c1810 0%, #4a2c1a 30%, #6b3a20 60%, #4a2c1a 100%);
-  padding: 5rem 1.25rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  border-bottom: 0.25rem solid #c9a84c;
+    background: linear-gradient(135deg, #2c1810 0%, #4a2c1a 30%, #6b3a20 60%, #4a2c1a 100%);
+    padding: 5rem 1.25rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 0.25rem solid #c9a84c;
 }
 
 .cob .hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 20H50L38 30L42 45L30 35L18 45L22 30L10 20H25Z' fill='%23c9a84c' opacity='0.04'/%3E%3C/svg%3E")
-    repeat;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 20H50L38 30L42 45L30 35L18 45L22 30L10 20H25Z' fill='%23c9a84c' opacity='0.04'/%3E%3C/svg%3E")
+        repeat;
 }
 
 .cob .hero h1 {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  color: #f0d68a;
-  text-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.5);
-  position: relative;
-  letter-spacing: 0.19rem;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: #f0d68a;
+    text-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.5);
+    position: relative;
+    letter-spacing: 0.19rem;
 }
 
 .cob .hero .subtitle {
-  color: #c9a84c;
-  font-size: 1.3rem;
-  margin-top: 0.75rem;
-  font-style: italic;
-  position: relative;
+    color: #c9a84c;
+    font-size: 1.3rem;
+    margin-top: 0.75rem;
+    font-style: italic;
+    position: relative;
 }
 
 .cob .hero .crest {
-  font-size: 4rem;
-  display: block;
-  margin-bottom: 1rem;
-  position: relative;
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1rem;
+    position: relative;
 }
 
 /* --- Sections (parchment cards) --- */
 
 .cob section {
-  background: #faf3e6;
-  margin: 1.875rem 0;
-  border-radius: 0.75rem;
-  padding: 2.5rem;
-  box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.3);
-  border: 0.0625rem solid #d4c4a0;
-  position: relative;
+    background: #faf3e6;
+    margin: 1.875rem 0;
+    border-radius: 0.75rem;
+    padding: 2.5rem;
+    box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.3);
+    border: 0.0625rem solid #d4c4a0;
+    position: relative;
 }
 
 .cob section::before {
-  content: '';
-  position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
-  right: 0.5rem;
-  bottom: 0.5rem;
-  border: 0.0625rem solid #e8d9b8;
-  border-radius: 0.5rem;
-  pointer-events: none;
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    border: 0.0625rem solid #e8d9b8;
+    border-radius: 0.5rem;
+    pointer-events: none;
 }
 
 /* --- Intro Callout Box --- */
 
 .cob .intro-box {
-  background: linear-gradient(135deg, #f5ead0, #faf3e6);
-  border-left: 0.25rem solid #c9a84c;
-  padding: 1.25rem 1.5rem;
-  border-radius: 0 0.5rem 0.5rem 0;
-  margin: 1.25rem 0;
-  font-size: 1.05rem;
+    background: linear-gradient(135deg, #f5ead0, #faf3e6);
+    border-left: 0.25rem solid #c9a84c;
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    margin: 1.25rem 0;
+    font-size: 1.05rem;
 }
 
 /* --- Phase Flow (A–E pills) --- */
 
 .cob .phase-flow {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.625rem;
-  margin: 1.25rem 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.625rem;
+    margin: 1.25rem 0;
 }
 
 .cob .phase-pip {
-  background: linear-gradient(135deg, #6b3a20, #8b5a30);
-  color: #f0d68a;
-  text-align: center;
-  padding: 0.875rem 0.5rem;
-  border-radius: 0.5rem;
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  font-size: 1.1rem;
-  box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #6b3a20, #8b5a30);
+    color: #f0d68a;
+    text-align: center;
+    padding: 0.875rem 0.5rem;
+    border-radius: 0.5rem;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.2);
 }
 
 .cob .phase-pip small {
-  display: block;
-  font-family: 'Crimson Text', serif;
-  font-weight: 400;
-  font-size: 0.75rem;
-  opacity: 0.85;
-  margin-top: 0.125rem;
+    display: block;
+    font-family: 'Crimson Text', serif;
+    font-weight: 400;
+    font-size: 0.75rem;
+    opacity: 0.85;
+    margin-top: 0.125rem;
 }
 
 /* --- Action Cards --- */
 
 .cob .action-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin: 1.25rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.25rem 0;
 }
 
 .cob .action-card {
-  background: #fff9ee;
-  border: 0.0625rem solid #d4c4a0;
-  border-radius: 0.5rem;
-  padding: 1.125rem;
-  position: relative;
-  transition: transform 0.15s;
+    background: #fff9ee;
+    border: 0.0625rem solid #d4c4a0;
+    border-radius: 0.5rem;
+    padding: 1.125rem;
+    position: relative;
+    transition: transform 0.15s;
 }
 
 .cob .action-card:hover {
-  transform: translateY(-0.125rem);
-  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
 }
 
 .cob .action-card .num {
-  position: absolute;
-  top: -0.625rem;
-  left: -0.625rem;
-  background: #5a2d0c;
-  color: #f0d68a;
-  width: 1.875rem;
-  height: 1.875rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  font-size: 0.9rem;
+    position: absolute;
+    top: -0.625rem;
+    left: -0.625rem;
+    background: #5a2d0c;
+    color: #f0d68a;
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 0.9rem;
 }
 
 .cob .action-card h4 {
-  font-family: 'Cinzel', serif;
-  color: #5a2d0c;
-  margin-bottom: 0.375rem;
-  font-size: 1rem;
+    font-family: 'Cinzel', serif;
+    color: #5a2d0c;
+    margin-bottom: 0.375rem;
+    font-size: 1rem;
 }
 
 .cob .action-card p {
-  font-size: 0.95rem;
-  margin: 0;
-  color: #5a3a20;
+    font-size: 0.95rem;
+    margin: 0;
+    color: #5a3a20;
 }
 
 /* --- Worker Tip Callout --- */
 
 .cob .worker-tip {
-  background: #e8f4e8;
-  border: 0.0625rem solid #8bc24a;
-  border-radius: 0.5rem;
-  padding: 1rem 1.25rem;
-  margin: 1rem 0;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
+    background: #e8f4e8;
+    border: 0.0625rem solid #8bc24a;
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
 }
 
 .cob .worker-tip .tip-icon {
-  font-size: 1.5rem;
-  flex-shrink: 0;
+    font-size: 1.5rem;
+    flex-shrink: 0;
 }
 
 /* --- Scoring Boxes --- */
 
 .cob .scoring-box {
-  background: linear-gradient(135deg, #5a2d0c, #7a4420);
-  color: #faf3e6;
-  padding: 1.5rem;
-  border-radius: 0.625rem;
-  margin: 1.25rem 0;
+    background: linear-gradient(135deg, #5a2d0c, #7a4420);
+    color: #faf3e6;
+    padding: 1.5rem;
+    border-radius: 0.625rem;
+    margin: 1.25rem 0;
 }
 
 .cob .scoring-box p {
-  color: #faf3e6;
+    color: #faf3e6;
 }
 
 .cob .scoring-box h3 {
-  color: #f0d68a;
-  margin-top: 0;
+    color: #f0d68a;
+    margin-top: 0;
 }
 
 .cob .scoring-box ul {
-  margin-left: 1.25rem;
+    margin-left: 1.25rem;
 }
 
 .cob .scoring-box li {
-  color: #e8d9b8;
-  margin-bottom: 0.375rem;
+    color: #e8d9b8;
+    margin-bottom: 0.375rem;
 }
 
 /* --- Tile Tables --- */
 
 .cob .tile-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  margin: 1.25rem 0;
-  border-radius: 0.5rem;
-  overflow: hidden;
-  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 1.25rem 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.08);
 }
 
 .cob .tile-table th {
-  background: #5a2d0c;
-  color: #f0d68a;
-  font-family: 'Cinzel', serif;
-  padding: 0.75rem 1rem;
-  text-align: left;
-  font-size: 0.95rem;
+    background: #5a2d0c;
+    color: #f0d68a;
+    font-family: 'Cinzel', serif;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.95rem;
 }
 
 .cob .tile-table td {
-  padding: 0.75rem 1rem;
-  border-bottom: 0.0625rem solid #e8d9b8;
-  vertical-align: top;
+    padding: 0.75rem 1rem;
+    border-bottom: 0.0625rem solid #e8d9b8;
+    vertical-align: top;
 }
 
 .cob .tile-table tr:last-child td {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 .cob .tile-table tr:nth-child(even) {
-  background: #f5ead0;
+    background: #f5ead0;
 }
 
 .cob .tile-table tr:nth-child(odd) {
-  background: #faf3e6;
+    background: #faf3e6;
 }
 
 .cob .tile-dot {
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  vertical-align: middle;
-  margin-right: 0.5rem;
-  border: 0.0625rem solid rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+    border: 0.0625rem solid rgba(0, 0, 0, 0.15);
 }
 
-.cob .dot-blue   { background: #4a8bc2; }
-.cob .dot-lgreen { background: #8bc24a; }
-.cob .dot-beige  { background: #d4b87a; }
-.cob .dot-dgreen { background: #2a7a3a; }
-.cob .dot-gray   { background: #8a8a8a; }
-.cob .dot-yellow { background: #e8c840; }
+.cob .dot-blue {
+    background: #4a8bc2;
+}
+.cob .dot-lgreen {
+    background: #8bc24a;
+}
+.cob .dot-beige {
+    background: #d4b87a;
+}
+.cob .dot-dgreen {
+    background: #2a7a3a;
+}
+.cob .dot-gray {
+    background: #8a8a8a;
+}
+.cob .dot-yellow {
+    background: #e8c840;
+}
 
 /* --- Monastery Cards --- */
 
 .cob .monastery-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  margin: 1rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 1rem 0;
 }
 
 .cob .mon-card {
-  background: #fff9ee;
-  border: 0.0625rem solid #d4c4a0;
-  border-radius: 0.375rem;
-  padding: 0.875rem;
-  font-size: 0.92rem;
+    background: #fff9ee;
+    border: 0.0625rem solid #d4c4a0;
+    border-radius: 0.375rem;
+    padding: 0.875rem;
+    font-size: 0.92rem;
 }
 
 .cob .mon-card .mon-num {
-  font-family: 'Cinzel', serif;
-  color: #c9a84c;
-  font-weight: 700;
-  margin-right: 0.25rem;
+    font-family: 'Cinzel', serif;
+    color: #c9a84c;
+    font-weight: 700;
+    margin-right: 0.25rem;
 }
 
 /* --- End-of-Game Box --- */
 
 .cob .endgame {
-  background: linear-gradient(135deg, #faf3e6, #f0e4c8);
-  border: 0.125rem solid #c9a84c;
-  border-radius: 0.625rem;
-  padding: 1.875rem;
-  margin: 1.25rem 0;
-  text-align: center;
+    background: linear-gradient(135deg, #faf3e6, #f0e4c8);
+    border: 0.125rem solid #c9a84c;
+    border-radius: 0.625rem;
+    padding: 1.875rem;
+    margin: 1.25rem 0;
+    text-align: center;
 }
 
 .cob .endgame h3 {
-  color: #5a2d0c;
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
+    color: #5a2d0c;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
 }
 
 .cob .endgame ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-  text-align: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    text-align: left;
 }
 
 .cob .endgame li {
-  padding: 0.375rem 0;
-  font-size: 1.05rem;
+    padding: 0.375rem 0;
+    font-size: 1.05rem;
 }
 
 .cob .endgame li::before {
-  content: '⚜ ';
-  color: #c9a84c;
+    content: '⚜ ';
+    color: #c9a84c;
 }
 
 /* --- Decorative Divider --- */
 
 .cob .divider {
-  text-align: center;
-  margin: 0.625rem 0 1.25rem;
-  color: #c9a84c;
-  letter-spacing: 0.5rem;
-  font-size: 0.8rem;
+    text-align: center;
+    margin: 0.625rem 0 1.25rem;
+    color: #c9a84c;
+    letter-spacing: 0.5rem;
+    font-size: 0.8rem;
 }
 
 /* --- Footer --- */
 
 .cob footer {
-  text-align: center;
-  padding: 1.875rem;
-  color: #8a7a60;
-  font-size: 0.9rem;
-  font-style: italic;
+    text-align: center;
+    padding: 1.875rem;
+    color: #8a7a60;
+    font-size: 0.9rem;
+    font-style: italic;
 }
 
 /* --- Responsive --- */
 
 @media (max-width: 37.5rem) {
-  .cob .action-grid,
-  .cob .phase-flow {
-    grid-template-columns: 1fr;
-  }
+    .cob .action-grid,
+    .cob .phase-flow {
+        grid-template-columns: 1fr;
+    }
 
-  .cob .monastery-grid {
-    grid-template-columns: 1fr;
-  }
+    .cob .monastery-grid {
+        grid-template-columns: 1fr;
+    }
 }
