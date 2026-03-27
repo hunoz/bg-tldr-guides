@@ -15,8 +15,6 @@ export class DnsStack extends Stack {
         this.zone = HostedZone.fromHostedZoneAttributes(this, 'HostedZone', {
             zoneName: props.zoneName,
             hostedZoneId: props.zoneId,
-        })
-
-        this.zone = HostedZone.fromHostedZoneId(this, 'HostedZone', props.zoneId);
+        });
     }
 }
