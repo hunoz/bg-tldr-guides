@@ -5,6 +5,8 @@ export interface NavItem {
   id: string
   label: string
   icon?: string
+  /** Hash href for scroll-to-section links (e.g. "#overview") */
+  href?: string
   /** If provided, called instead of scroll-to-section */
   onSelect?: () => void
 }
@@ -24,9 +26,9 @@ export default function SideNav({ groups }: SideNavProps) {
 
   const toggle = useCallback(() => setIsOpen((o) => !o), [])
 
-  // Collect all scrollable items (those without onSelect) for intersection tracking
-  const scrollableItems = groups.flatMap((g) => g.items.filter((i) => !i.onSelect))
+  const scrollableItems = groups.flatMap((g) => g.items.filter((i) => !i.onSelect && i.href))
 
+  // Sync active state from intersection observer and update URL hash
   useEffect(() => {
     if (scrollableItems.length === 0) return
 
@@ -35,10 +37,11 @@ export default function SideNav({ groups }: SideNavProps) {
         for (const entry of entries) {
           if (entry.isIntersecting) {
             setActiveId(entry.target.id)
+            history.replaceState(null, "", `#${entry.target.id}`)
           }
         }
       },
-      { rootMargin: "-20% 0px -60% 0px" }
+      { rootMargin: "-20% 0px -60% 0px" },
     )
 
     for (const item of scrollableItems) {
@@ -50,14 +53,32 @@ export default function SideNav({ groups }: SideNavProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [groups])
 
-  const handleClick = (item: NavItem) => {
+  // On mount, scroll to hash if present
+  useEffect(() => {
+    const hash = window.location.hash.slice(1)
+    if (!hash) return
+
+    // Small delay to let the DOM render
+    const timer = setTimeout(() => {
+      const el = document.getElementById(hash)
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" })
+        setActiveId(hash)
+      }
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [])
+
+  const handleClick = (e: React.MouseEvent, item: NavItem) => {
     if (item.onSelect) {
       item.onSelect()
     } else {
+      e.preventDefault()
       const el = document.getElementById(item.id)
       if (el) {
         el.scrollIntoView({ behavior: "smooth" })
         setActiveId(item.id)
+        history.pushState(null, "", `#${item.id}`)
       }
     }
     if (window.innerWidth < 768) setIsOpen(false)
@@ -83,15 +104,28 @@ export default function SideNav({ groups }: SideNavProps) {
             <ul className="sidenav-list" role="list">
               {group.items.map((item) => (
                 <li key={item.id}>
-                  <button
-                    className={`sidenav-link ${activeId === item.id ? "sidenav-link--active" : ""}`}
-                    onClick={() => handleClick(item)}
-                  >
-                    {item.icon && (
-                      <span className="sidenav-link-icon" aria-hidden="true">{item.icon}</span>
-                    )}
-                    {item.label}
-                  </button>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      className={`sidenav-link ${activeId === item.id ? "sidenav-link--active" : ""}`}
+                      onClick={(e) => handleClick(e, item)}
+                    >
+                      {item.icon && (
+                        <span className="sidenav-link-icon" aria-hidden="true">{item.icon}</span>
+                      )}
+                      {item.label}
+                    </a>
+                  ) : (
+                    <button
+                      className={`sidenav-link ${activeId === item.id ? "sidenav-link--active" : ""}`}
+                      onClick={(e) => handleClick(e, item)}
+                    >
+                      {item.icon && (
+                        <span className="sidenav-link-icon" aria-hidden="true">{item.icon}</span>
+                      )}
+                      {item.label}
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>

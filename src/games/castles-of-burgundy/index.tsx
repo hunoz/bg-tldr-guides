@@ -13,7 +13,7 @@ import YourTurnSection from "./sections/YourTurn"
 import { useEffect } from "react";
 import { useSideNavStore } from "@/stores/sidenav";
 import { getBackItem, getGameItems } from "@/utils/sidenav";
-import { NavGroup } from "@/components/SideNav";
+import type { NavGroup } from "@/components/SideNav";
 import { useNavigate } from "@tanstack/react-router";
 
 export default function CastlesOfBurgundy() {
@@ -23,15 +23,15 @@ export default function CastlesOfBurgundy() {
     const navigate = useNavigate();
 
     const sections = [
-      { id: "overview", label: cob.t('overview.sidenav'), icon: "🎯" },
-      { id: "setup", label: cob.t('setup.sidenav'), icon: "⚙️" },
-      { id: "game-flow", label: cob.t('gameFlow.sidenav'), icon: "🔄" },
-      { id: "your-turn", label: cob.t('yourTurn.sidenav'), icon: "🎲" },
-      { id: "scoring", label: cob.t('scoring.sidenav'), icon: "⭐" },
-      { id: "tile-types", label: cob.t('tileTypes.sidenav'), icon: "🧩" },
-      { id: "buildings", label: cob.t('buildings.sidenav'), icon: "🏠" },
-      { id: "monasteries", label: cob.t('monasteries.sidenav'), icon: "⛪" },
-      { id: "end-of-game", label: cob.t('endOfGame.sidenav'), icon: "🏁" },
+      { id: "overview", label: cob.t('overview.sidenav'), icon: "🎯", href: "#overview" },
+      { id: "setup", label: cob.t('setup.sidenav'), icon: "⚙️", href: "#setup" },
+      { id: "game-flow", label: cob.t('gameFlow.sidenav'), icon: "🔄", href: "#game-flow" },
+      { id: "your-turn", label: cob.t('yourTurn.sidenav'), icon: "🎲", href: "#your-turn" },
+      { id: "scoring", label: cob.t('scoring.sidenav'), icon: "⭐", href: "#scoring" },
+      { id: "tile-types", label: cob.t('tileTypes.sidenav'), icon: "🧩", href: "#tile-types" },
+      { id: "buildings", label: cob.t('buildings.sidenav'), icon: "🏠", href: "#buildings" },
+      { id: "monasteries", label: cob.t('monasteries.sidenav'), icon: "⛪", href: "#monasteries" },
+      { id: "end-of-game", label: cob.t('endOfGame.sidenav'), icon: "🏁", href: "#end-of-game" },
     ]
 
     const backItem = getBackItem(() => setGroups([
