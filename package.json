@@ -5,7 +5,7 @@
         "web:dev": "pnpm --filter @rulesnap/web dev",
         "web:build": "pnpm --filter @rulesnap/web build",
         "infra:synth": "pnpm --filter @rulesnap/infra synth",
-        "infra:deploy": "pnpm web:build && pnpm --filter @rulesnap/infra deploy",
+        "infra:deploy": "pnpm web:build && pnpm --filter @rulesnap/infra run deploy",
         "infra:diff": "pnpm --filter @rulesnap/infra diff"
     }
 }
