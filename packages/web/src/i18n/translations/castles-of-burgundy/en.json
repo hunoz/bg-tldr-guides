@@ -2,7 +2,8 @@
     "app": {
         "title": "The Castles of Burgundy",
         "subtitle": "A Plain-Language Play Guide",
-        "footer": "🏰 The Castles of Burgundy — Play Guide 🏰"
+        "footer": "🏰 The Castles of Burgundy — Play Guide 🏰",
+        "icon": "🏰"
     },
     "overview": {
         "heading": "What You're Trying to Do",

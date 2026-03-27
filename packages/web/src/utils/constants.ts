@@ -1,6 +1,13 @@
-import i18n from '@/i18n';
+import i18n, { gameIds } from '@/i18n';
 import type { GameId } from '@/types/id';
 
-export const games: { id: GameId; label: string; icon?: string }[] = [
-    { id: 'castles-of-burgundy', label: i18n.t('castles-of-burgundy:app.title'), icon: '🏰' },
-];
+// Use the untyped i18next `t` to resolve dynamic game namespace keys.
+// The strict CustomTypeOptions typing only knows statically-declared namespaces,
+// but game namespaces are discovered at runtime via glob.
+const t = i18n.t.bind(i18n) as (key: string, opts?: Record<string, unknown>) => string;
+
+export const games: { id: GameId; label: string; icon: string }[] = gameIds.map(id => ({
+    id,
+    label: t('app.title', { ns: id }),
+    icon: t('app.icon', { ns: id }),
+}));

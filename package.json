@@ -1,10 +1,10 @@
 {
     "private": true,
     "scripts": {
-        "web:dev": "pnpm --filter @cob-guide/web dev",
-        "web:build": "pnpm --filter @cob-guide/web build",
-        "infra:synth": "pnpm --filter @cob-guide/infra synth",
-        "infra:deploy": "pnpm web:build && pnpm --filter @cob-guide/infra deploy",
-        "infra:diff": "pnpm --filter @cob-guide/infra diff"
+        "web:dev": "pnpm --filter @rulesnap/web dev",
+        "web:build": "pnpm --filter @rulesnap/web build",
+        "infra:synth": "pnpm --filter @rulesnap/infra synth",
+        "infra:deploy": "pnpm web:build && pnpm --filter @rulesnap/infra deploy",
+        "infra:diff": "pnpm --filter @rulesnap/infra diff"
     }
 }

@@ -2,7 +2,8 @@
     "app": {
         "title": "Los castillos de Borgoña",
         "subtitle": "Una guía de juego en lenguaje simple",
-        "footer": "🏰 Los castillos de Borgoña — Guía de juegos 🏰"
+        "footer": "🏰 Los castillos de Borgoña — Guía de juegos 🏰",
+        "icon": "🏰"
     },
     "overview": {
         "heading": "Lo que está tratando de hacer",

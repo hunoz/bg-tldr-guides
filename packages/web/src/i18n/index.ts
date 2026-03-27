@@ -27,6 +27,9 @@ for (const [path, mod] of Object.entries(translationModules)) {
 
 const ns = [...namespaces];
 
+/** All auto-discovered game namespace IDs (excludes "common"). */
+export const gameIds = ns.filter(n => n !== 'common');
+
 i18n.use(LanguageDetector)
     .use(initReactI18next)
     .init({

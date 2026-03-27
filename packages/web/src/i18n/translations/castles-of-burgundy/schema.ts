@@ -3,6 +3,7 @@ export type CoBSchema = {
         title: string;
         subtitle: string;
         footer: string;
+        icon: string;
     };
     overview: {
         heading: string;

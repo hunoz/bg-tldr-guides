@@ -1,1 +1,3 @@
-export type GameId = 'castles-of-burgundy';
+import { gameIds } from '@/i18n';
+
+export type GameId = (typeof gameIds)[number];
