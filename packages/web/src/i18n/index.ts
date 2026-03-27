@@ -38,6 +38,7 @@ i18n.use(LanguageDetector)
         defaultNS: ns[0],
         fallbackLng: 'en',
         detection: {
+            lookupQuerystring: 'lang',
             order: ['querystring', 'navigator'],
             caches: [],
         },

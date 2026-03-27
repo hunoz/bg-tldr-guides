@@ -11,9 +11,9 @@ function App() {
     const navigate = useNavigate();
     const search = useSearch({ strict: false }) as Record<string, string | undefined>;
 
-    // Sync i18next language when the `lng` querystring changes client-side
+    // Sync i18next language when the `lang` querystring changes client-side
     useEffect(() => {
-        const lng = search.lng;
+        const lng = search.lang;
         if (lng && lng !== i18n.language) {
             i18n.changeLanguage(lng);
         }
