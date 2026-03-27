@@ -1,31 +1,24 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
-import * as cdk from 'aws-cdk-lib';
 import { SpaStack } from '../lib/spa-stack';
 import { DnsStack } from '../lib/dns-stack';
+import { App } from 'aws-cdk-lib';
 
-const app = new cdk.App();
+const app = new App();
 
-const zoneId = process.env.ZONE_ID;
-const domainName = process.env.DOMAIN_NAME;
-const account = process.env.AWS_ACCOUNT;
-const region = process.env.AWS_REGION;
+function checkEnvironmentVariable(envVar: string): string {
+    if (!process.env[envVar]) {
+        throw new Error(`${envVar} environment variable is required`);
+    }
 
-if (!zoneId) {
-    throw new Error('ZONE_ID environment variable is required');
+    return process.env[envVar];
 }
 
-if (!domainName) {
-    throw new Error('DOMAIN_NAME environment variable is required');
-}
-
-if (!account) {
-    throw new Error('AWS_ACCOUNT environment variable is required');
-}
-
-if (!region) {
-    throw new Error('AWS_REGION environment variable is required');
-}
+const zoneId = checkEnvironmentVariable('ZONE_ID');
+const zoneName = checkEnvironmentVariable('ZONE_NAME');
+const domainName = checkEnvironmentVariable('ZONE_NAME');
+const account = checkEnvironmentVariable('AWS_ACCOUNT');
+const region = checkEnvironmentVariable('AWS_REGION');
 
 const env = {
     account,
@@ -34,7 +27,8 @@ const env = {
 
 const dnsStack = new DnsStack(app, 'DnsStack', {
     env,
-    zoneId: zoneId,
+    zoneName,
+    zoneId,
 })
 
 new SpaStack(app, 'SpaStack', {
