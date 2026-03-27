@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# CDK
+packages/infra/cdk.out
+*.js.map
+*.d.ts
+
+# Build info
+tsconfig.tsbuildinfo

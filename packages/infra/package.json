@@ -1,0 +1,23 @@
+{
+    "name": "@bg-tldr-guides/infra",
+    "private": true,
+    "version": "0.0.0",
+    "scripts": {
+        "build": "tsc",
+        "synth": "cdk synth",
+        "deploy": "cdk deploy",
+        "diff": "cdk diff",
+        "destroy": "cdk destroy"
+    },
+    "dependencies": {
+        "aws-cdk-lib": "^2.200.0",
+        "constructs": "^10.4.2",
+        "source-map-support": "^0.5.21"
+    },
+    "devDependencies": {
+        "@types/node": "^24.12.0",
+        "aws-cdk": "^2.200.0",
+        "ts-node": "^10.9.2",
+        "typescript": "~5.9.3"
+    }
+}
