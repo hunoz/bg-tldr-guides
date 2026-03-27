@@ -78,7 +78,7 @@
 
 .cob .hero {
     background: linear-gradient(135deg, #2c1810 0%, #4a2c1a 30%, #6b3a20 60%, #4a2c1a 100%);
-    padding: 5rem 1.25rem;
+    padding: 2.5rem 1.25rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -94,6 +94,8 @@
 }
 
 .cob .hero h1 {
+    margin-block-start: 0%;
+    margin-block-end: 0%;
     font-family: 'Cinzel', serif;
     font-size: clamp(2rem, 5vw, 3.5rem);
     color: #f0d68a;
@@ -105,15 +107,16 @@
 .cob .hero .subtitle {
     color: #c9a84c;
     font-size: 1.3rem;
-    margin-top: 0.75rem;
+    margin-top: 0%;
+    margin-bottom: 0%;
     font-style: italic;
     position: relative;
 }
 
 .cob .hero .crest {
-    font-size: 4rem;
+    font-size: 3.5rem;
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     position: relative;
 }
 
