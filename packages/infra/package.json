@@ -6,6 +6,7 @@
         "build": "tsc",
         "synth": "cdk synth",
         "deploy": "cdk deploy --all --require-approval never",
+        "bootstrap": "cdk bootstrap",
         "diff": "cdk diff",
         "destroy": "cdk destroy"
     },

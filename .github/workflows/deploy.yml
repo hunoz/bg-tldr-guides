@@ -34,6 +34,14 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           aws-region: us-east-1
 
+      - name: Bootstrap
+        run: pnpm infra:bootstrap
+        env:
+          ZONE_ID: ${{ secrets.ZONE_ID }}
+          AWS_ACCOUNT: ${{ secrets.AWS_ACCOUNT }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+          
       - name: Deploy
         run: pnpm infra:deploy -- --require-approval never
         env:
