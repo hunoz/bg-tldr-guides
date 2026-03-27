@@ -4,7 +4,8 @@ import { AllowedMethods, CachedMethods, CachePolicy, Distribution, HttpVersion, 
 import { S3BucketOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { PolicyStatement, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
 import { Key } from 'aws-cdk-lib/aws-kms';
-import { IHostedZone } from 'aws-cdk-lib/aws-route53';
+import { ARecord, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
+import { CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
 import { BlockPublicAccess, Bucket, BucketEncryption, ObjectOwnership } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
@@ -69,7 +70,8 @@ export class SpaStack extends Stack {
             defaultRootObject: 'index.html',
             httpVersion: HttpVersion.HTTP2_AND_3,
             priceClass: PriceClass.PRICE_CLASS_100,
-            domainNames: props.domainName ? [props.domainName] : undefined,
+            domainNames: [props.domainName],
+            enableLogging: true,
             certificate,
             minimumProtocolVersion: SecurityPolicyProtocol.TLS_V1_2_2021,
             errorResponses: [
@@ -85,6 +87,18 @@ export class SpaStack extends Stack {
             distribution,
             distributionPaths: ['/*'],
         });
+
+        const subdomainReplaced = props.domainName.replaceAll(`.${props.hostedZone.zoneName}`, '');
+
+        const subdomain = subdomainReplaced === '' ? undefined : subdomainReplaced;
+
+        new ARecord(this, 'ARecord', {
+            zone: props.hostedZone,
+            recordName: subdomain,
+            target: RecordTarget.fromAlias(
+                new CloudFrontTarget(distribution),
+            ),
+        })
 
         // Outputs
         new CfnOutput(this, 'BucketName', { value: spaBucket.bucketName });
