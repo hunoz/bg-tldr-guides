@@ -1,3 +1,4 @@
+import TransWithHtml from '@/components/TransWithHtml';
 import { Trans, useTranslation } from 'react-i18next';
 
 export default function SetupSection() {
@@ -27,17 +28,15 @@ export default function SetupSection() {
             </ol>
             <h3>{setup.firstPlayerHeading}</h3>
             <p>
-                <Trans
+                <TransWithHtml
                     ns='castles-of-burgundy'
                     i18nKey='setup.firstPlayerRoll'
-                    components={{ strong: <strong /> }}
                 />
             </p>
             <p>
-                <Trans
+                <TransWithHtml
                     ns='castles-of-burgundy'
                     i18nKey='setup.bridgeNote'
-                    components={{ em: <em /> }}
                 />
             </p>
         </section>

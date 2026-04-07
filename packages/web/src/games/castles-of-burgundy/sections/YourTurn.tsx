@@ -1,3 +1,4 @@
+import TransWithHtml from '@/components/TransWithHtml';
 import { Trans, useTranslation } from 'react-i18next';
 
 export default function YourTurnSection() {
@@ -9,10 +10,9 @@ export default function YourTurnSection() {
                 <span className='icon'>🎲</span> {yourTurn.heading}
             </h2>
             <p>
-                <Trans
+                <TransWithHtml
                     ns='castles-of-burgundy'
                     i18nKey='yourTurn.intro'
-                    components={{ strong: <strong /> }}
                 />
             </p>
             <div className='action-grid'>
@@ -27,19 +27,17 @@ export default function YourTurnSection() {
                 ))}
             </div>
             <p style={{ marginTop: 8 }}>
-                <Trans
+                <TransWithHtml
                     ns='castles-of-burgundy'
                     i18nKey='yourTurn.buyCenter'
-                    components={{ strong: <strong />, em: <em /> }}
                 />
             </p>
             <div className='worker-tip'>
                 <span className='tip-icon'>⚙️</span>
                 <div>
-                    <Trans
+                    <TransWithHtml
                         ns='castles-of-burgundy'
                         i18nKey='yourTurn.workerTip'
-                        components={{ strong: <strong /> }}
                     />
                 </div>
             </div>

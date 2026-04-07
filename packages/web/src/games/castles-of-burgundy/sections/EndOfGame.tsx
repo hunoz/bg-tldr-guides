@@ -1,3 +1,4 @@
+import TransWithHtml from '@/components/TransWithHtml';
 import { Trans, useTranslation } from 'react-i18next';
 
 export default function EndOfGameSection() {
@@ -19,10 +20,9 @@ export default function EndOfGameSection() {
             </div>
             <div className='divider'>· · · · · · ·</div>
             <p style={{ textAlign: 'center' }}>
-                <Trans
+                <TransWithHtml
                     ns='castles-of-burgundy'
                     i18nKey='endOfGame.winner'
-                    components={{ strong: <strong />, br: <br /> }}
                 />
             </p>
         </section>

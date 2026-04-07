@@ -1,3 +1,4 @@
+import TransWithHtml from '@/components/TransWithHtml';
 import { Trans, useTranslation } from 'react-i18next';
 
 export default function ScoringSection() {
@@ -14,10 +15,9 @@ export default function ScoringSection() {
                 <ul>
                     {scoring.areasCriteria.map((_, i) => (
                         <li key={i}>
-                            <Trans
+                            <TransWithHtml
                                 ns='castles-of-burgundy'
                                 i18nKey={`scoring.areasCriteria.${i}` as never}
-                                components={{ strong: <strong /> }}
                             />
                         </li>
                     ))}

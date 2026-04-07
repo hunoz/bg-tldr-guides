@@ -1,3 +1,4 @@
+import TransWithHtml from '@/components/TransWithHtml';
 import { Trans, useTranslation } from 'react-i18next';
 
 export default function GameFlowSection() {
@@ -9,10 +10,9 @@ export default function GameFlowSection() {
                 <span className='icon'>🔄</span> {t('gameFlow.heading')}
             </h2>
             <p>
-                <Trans
+                <TransWithHtml
                     ns='castles-of-burgundy'
                     i18nKey='gameFlow.intro'
-                    components={{ strong: <strong /> }}
                 />
             </p>
             <div className='phase-flow'>

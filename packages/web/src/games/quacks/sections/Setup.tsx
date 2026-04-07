@@ -1,102 +1,128 @@
+import TransWithHtml from '@/components/TransWithHtml';
+import { useTranslation } from 'react-i18next';
+
 export default function Setup() {
+    const { t } = useTranslation('quacks');
+
     return (
         <>
-            <h2>🧪 Setup</h2>
+            <h2>🧪 {t('setup.title')}</h2>
 
-            <h3>Table Setup</h3>
+            <h3>{t('setup.tableSetup.header')}</h3>
             <div className='qk-card'>
                 <ol className='qk-steps'>
-                    <li>Shuffle the fortune teller deck face down in a pile.</li>
+                    <li>{t('setup.tableSetup.shuffleFortuneTellerDeck')}</li>
                     <li>
-                        Place the flame marker on space <strong>1</strong> of the round track.
+                        <TransWithHtml
+                            ns='quacks'
+                            i18nKey='setup.tableSetup.flameMarkerPlacement'
+                        />
                     </li>
                     <li>
-                        Choose a set of ingredient books (numbered 1–4 by bookmark count). Pick one{' '}
-                        <span className='qk-token qk-token-orange'></span> orange (pumpkin) book and
-                        one <span class='qk-token qk-token-black'></span> black (moth) book. Flip
-                        each to the side matching your player count (shown by cauldron icons in the
-                        bottom-left corner).
+                        <TransWithHtml
+                            ns='quacks'
+                            i18nKey='setup.tableSetup.chooseIngredientBooks'
+                        />
                     </li>
                     <li>
-                        Sort ingredient tokens into piles by value: <strong>1s</strong>,{' '}
-                        <strong>2s</strong>, and <strong>3+</strong>. Colors will be mixed within
-                        piles — this is intentional.
+                        <TransWithHtml
+                            ns='quacks'
+                            i18nKey='setup.tableSetup.sortIngredientTokens'
+                        />
                     </li>
                 </ol>
             </div>
 
-            <h3>Per-Player Setup</h3>
+            <h3>{t('setup.perPlayerSetup.header')}</h3>
             <div className='qk-card qk-parchment'>
-                <p>Each player receives:</p>
+                <p>{t('setup.perPlayerSetup.eachPlayerReceives')}:</p>
                 <ul>
                     <li>
-                        <strong>1 cauldron board</strong> — book side up (not test tubes)
+                        <TransWithHtml
+                            ns='quacks'
+                            i18nKey='setup.perPlayerSetup.oneCauldronBoard'
+                        />
                     </li>
                     <li>
-                        <strong>1 scoring marker</strong> (matching color) → place next to space 1
-                        on the scoring track
+                        <TransWithHtml
+                            ns='quacks'
+                            i18nKey='setup.perPlayerSetup.oneScoringMarker'
+                        />
                     </li>
                     <li>
-                        <strong>1 player marker</strong> → place on space 0 (zero side up)
+                        <TransWithHtml ns='quacks' i18nKey='setup.perPlayerSetup.onePlayerMarker' />
                     </li>
                     <li>
-                        <strong>1 bag</strong>
+                        <TransWithHtml ns='quacks' i18nKey='setup.perPlayerSetup.oneBag' />
                     </li>
                     <li>
-                        <strong>1 ruby</strong> → place to the left of your cauldron
+                        <TransWithHtml ns='quacks' i18nKey='setup.perPlayerSetup.oneRuby' />
                     </li>
                     <li>
-                        <strong>1 flask</strong> → place full-side up on the silver tray
+                        <TransWithHtml ns='quacks' i18nKey='setup.perPlayerSetup.oneFlask' />
                     </li>
                     <li>
-                        <strong>1 droplet marker</strong> → place on the first center space of your
-                        cauldron
+                        <TransWithHtml
+                            ns='quacks'
+                            i18nKey='setup.perPlayerSetup.oneDropletMarker'
+                        />
                     </li>
                     <li>
-                        <strong>1 rat marker</strong> → place in the bowl
+                        <TransWithHtml ns='quacks' i18nKey='setup.perPlayerSetup.oneRatMarker' />
                     </li>
                 </ul>
 
-                <h4>Starting Bag Contents (9 tokens)</h4>
+                <h4>{t('setup.perPlayerSetup.startingBagContents.header')}</h4>
                 <table>
                     <thead>
                         <tr>
-                            <th>Token</th>
-                            <th>Qty</th>
+                            <th>{t('setup.perPlayerSetup.startingBagContents.token')}</th>
+                            <th>{t('setup.perPlayerSetup.startingBagContents.qty')}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
-                                <span className='qk-token qk-token-white'></span> White 1 —
-                                Bloomberry
+                                <TransWithHtml
+                                    ns='quacks'
+                                    i18nKey='setup.perPlayerSetup.startingBagContents.white1Bloomberry'
+                                />
                             </td>
                             <td>4</td>
                         </tr>
                         <tr>
                             <td>
-                                <span className='qk-token qk-token-white'></span> White 2 —
-                                Bloomberry
+                                <TransWithHtml
+                                    ns='quacks'
+                                    i18nKey='setup.perPlayerSetup.startingBagContents.white2Bloomberry'
+                                />
                             </td>
                             <td>2</td>
                         </tr>
                         <tr>
                             <td>
-                                <span className='qk-token qk-token-white'></span> White 3 —
-                                Bloomberry
+                                <TransWithHtml
+                                    ns='quacks'
+                                    i18nKey='setup.perPlayerSetup.startingBagContents.white3Bloomberry'
+                                />
                             </td>
                             <td>1</td>
                         </tr>
                         <tr>
                             <td>
-                                <span className='qk-token qk-token-orange'></span> Orange 1 —
-                                Pumpkin
+                                <TransWithHtml
+                                    ns='quacks'
+                                    i18nKey='setup.perPlayerSetup.startingBagContents.orange1Pumpkin'
+                                />
                             </td>
                             <td>1</td>
                         </tr>
                         <tr>
                             <td>
-                                <span className='qk-token qk-token-green'></span> Green 1 — Spider
+                                <TransWithHtml
+                                    ns='quacks'
+                                    i18nKey='setup.perPlayerSetup.startingBagContents.green1Spider'
+                                />
                             </td>
                             <td>1</td>
                         </tr>
@@ -104,8 +130,7 @@ export default function Setup() {
                 </table>
 
                 <div className='qk-callout'>
-                    <strong>Scoring note:</strong> If a player crosses 50 points, flip the scoring
-                    marker to its "50" side and continue from the beginning of the track.
+                    <TransWithHtml ns='quacks' i18nKey='setup.scoringNote' />
                 </div>
             </div>
         </>
