@@ -1,9 +1,9 @@
-import { Link, type LinkProps } from "@tanstack/react-router";
+import { Link, type LinkProps } from '@tanstack/react-router';
 
 export type SecureLinkProps = Omit<LinkProps, 'rel' | 'onFollow' | 'to'> & {
     to: string;
     className?: string | undefined;
-}
+};
 
 export default function SecureLink(props: SecureLinkProps) {
     const { to, ...rest } = props;
@@ -17,5 +17,5 @@ export default function SecureLink(props: SecureLinkProps) {
         >
             {props.children}
         </Link>
-    )
+    );
 }

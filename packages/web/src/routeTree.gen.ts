@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as QuacksRouteImport } from './routes/quacks'
 import { Route as CastlesOfBurgundyRouteImport } from './routes/castles-of-burgundy'
 import { Route as IndexRouteImport } from './routes/index'
 
+const QuacksRoute = QuacksRouteImport.update({
+  id: '/quacks',
+  path: '/quacks',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CastlesOfBurgundyRoute = CastlesOfBurgundyRouteImport.update({
   id: '/castles-of-burgundy',
   path: '/castles-of-burgundy',
@@ -26,31 +32,42 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/castles-of-burgundy': typeof CastlesOfBurgundyRoute
+  '/quacks': typeof QuacksRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/castles-of-burgundy': typeof CastlesOfBurgundyRoute
+  '/quacks': typeof QuacksRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/castles-of-burgundy': typeof CastlesOfBurgundyRoute
+  '/quacks': typeof QuacksRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/castles-of-burgundy'
+  fullPaths: '/' | '/castles-of-burgundy' | '/quacks'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/castles-of-burgundy'
-  id: '__root__' | '/' | '/castles-of-burgundy'
+  to: '/' | '/castles-of-burgundy' | '/quacks'
+  id: '__root__' | '/' | '/castles-of-burgundy' | '/quacks'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CastlesOfBurgundyRoute: typeof CastlesOfBurgundyRoute
+  QuacksRoute: typeof QuacksRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/quacks': {
+      id: '/quacks'
+      path: '/quacks'
+      fullPath: '/quacks'
+      preLoaderRoute: typeof QuacksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/castles-of-burgundy': {
       id: '/castles-of-burgundy'
       path: '/castles-of-burgundy'
@@ -71,6 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CastlesOfBurgundyRoute: CastlesOfBurgundyRoute,
+  QuacksRoute: QuacksRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

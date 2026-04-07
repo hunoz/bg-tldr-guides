@@ -67,6 +67,12 @@ export default function CastlesOfBurgundy() {
         setTimeout(() => {
             setGroups(navGroups);
         }, 300);
+
+        const prev = document.body.style.backgroundColor;
+        document.body.style.backgroundColor = '#1a0f0a';
+        return () => {
+            document.body.style.backgroundColor = prev;
+        };
     }, []);
 
     return (
@@ -80,10 +86,7 @@ export default function CastlesOfBurgundy() {
                     🏰
                 </SecureLink>
                 <h1>
-                    <SecureLink
-                        to={gameLinks['castles-of-burgundy'].bggLink}
-                        target='_blank'
-                    >
+                    <SecureLink to={gameLinks['castles-of-burgundy'].bggLink} target='_blank'>
                         {cob.t('app.title')}
                     </SecureLink>
                 </h1>

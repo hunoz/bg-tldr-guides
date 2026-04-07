@@ -3,6 +3,9 @@
     "packageManager": "pnpm@8.15.1",
     "scripts": {
         "web:dev": "pnpm --filter @rulesnap/web dev",
+        "web:format": "pnpm --filter @rulesnap/web format",
+        "web:lint:fix": "pnpm --filter @rulesnap/web lint:fix",
+        "web:lint:check": "pnpm --filter @rulesnap/web lint:check",
         "web:build": "pnpm --filter @rulesnap/web build",
         "infra:synth": "pnpm --filter @rulesnap/infra synth",
         "infra:bootstrap": "pnpm web:build && pnpm --filter @rulesnap/infra bootstrap",

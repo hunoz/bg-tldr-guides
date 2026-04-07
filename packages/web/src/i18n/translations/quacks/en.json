@@ -1,0 +1,22 @@
+{
+    "app": {
+        "title": "The Quacks of Quedlinburg",
+        "icon": "⚗️"
+    },
+    "overview": {
+        "rounds": "Rounds",
+        "turns": "Turns",
+        "simultaneous": "Simultaneous",
+        "goal": "Goal",
+        "mostVictoryPoints": "mostVictoryPoints"
+    },
+    "setup": {
+        "title": "Setup",
+        "tableSetup": "Table Setup"
+    },
+    "roundStructure": {},
+    "endOfRound": {
+
+    },
+    "finalRound": {}
+}
