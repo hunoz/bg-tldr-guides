@@ -1,5 +1,5 @@
 import TransWithHtml from '@/components/TransWithHtml';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 export default function YourTurnSection() {
     const { t } = useTranslation('castles-of-burgundy');
