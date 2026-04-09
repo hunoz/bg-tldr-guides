@@ -13,5 +13,7 @@
     "home-feature-scoring": "Scoring Cheat Sheet",
     "home-feature-scoring-desc": "End-of-game scoring broken down into simple checks.",
     "available-guides": "Available Guides",
-    "search-games": "Search games..."
+    "search-games": "Search games...",
+    "bggButton": "BGG Page",
+    "manualButton": "Official Manual"
 }

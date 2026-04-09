@@ -31,11 +31,13 @@ Widget buildRichText(
   if (children.isEmpty) {
     return Text('', style: baseStyle);
   }
-  return Text.rich(
-    TextSpan(children: children),
-    style: baseStyle,
-    textAlign: textAlign,
-    overflow: TextOverflow.clip,
+  return SelectionContainer.disabled(
+    child: Text.rich(
+      TextSpan(children: children),
+      style: baseStyle,
+      textAlign: textAlign,
+      overflow: TextOverflow.clip,
+    ),
   );
 }
 

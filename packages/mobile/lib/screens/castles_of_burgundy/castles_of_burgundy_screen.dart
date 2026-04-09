@@ -9,6 +9,7 @@ import '../../theme/cob_theme.dart';
 import '../../theme/game_theme_provider.dart';
 import '../../utils/constants.dart';
 import '../../utils/responsive.dart';
+import '../../widgets/game_header_buttons.dart';
 import '../../widgets/scroll_tracker.dart';
 import '../../widgets/secure_link.dart';
 import '../../widgets/side_nav/side_nav_notifier.dart';
@@ -95,7 +96,7 @@ class _CastlesOfBurgundyScreenState extends State<CastlesOfBurgundyScreen> {
     final gameTitle = i18n.t(_namespace, 'app.title');
     final activeSection = _scrollTracker.activeSectionId;
 
-    // Build SideNav groups (Req 5.6)
+    // Build SideNav groups
     final sideNavGroups = [
       NavGroup(
         items: [
@@ -124,7 +125,7 @@ class _CastlesOfBurgundyScreenState extends State<CastlesOfBurgundyScreen> {
       sectionKeys: _sectionKeys,
     );
 
-    // Web tab title (Req 11.5)
+    // Web tab title
     if (kIsWeb) {
       content = Title(
         title: gameTitle,
@@ -172,10 +173,10 @@ class _CoBBody extends StatelessWidget {
         return CustomScrollView(
           controller: scrollController,
           slivers: [
-            // Hero banner (Req 7.1, 7.10)
+            // Hero banner
             SliverToBoxAdapter(child: _HeroBanner(i18n: i18n, theme: cobTheme, maxWidth: maxWidth)),
 
-            // Section widgets as slivers (Req 7.2)
+            // Section widgets as slivers
             SliverToBoxAdapter(
               child: OverviewSection(key: sectionKeys['overview'], i18n: i18n, theme: cobTheme),
             ),
@@ -204,7 +205,7 @@ class _CoBBody extends StatelessWidget {
               child: EndOfGameSection(key: sectionKeys['endOfGame'], i18n: i18n, theme: cobTheme),
             ),
 
-            // Footer (Req 7.9)
+            // Footer
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 32),
@@ -246,11 +247,8 @@ class _HeroBanner extends StatelessWidget {
           constraints: BoxConstraints(maxWidth: maxWidth),
           child: Column(
             children: [
-              // Tappable crest → BGG link (Req 7.10)
-              SecureLink(
-                url: bggLink,
-                child: const Text('🏰', style: TextStyle(fontSize: 56)),
-              ),
+              // Crest icon
+              const Text('🏰', style: TextStyle(fontSize: 56)),
               const SizedBox(height: 12),
               Text(
                 i18n.t(_namespace, 'app.title'),
@@ -258,23 +256,8 @@ class _HeroBanner extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _HeroBannerButton(
-                    label: i18n.t(_namespace, 'app.bggButton'),
-                    icon: Icons.open_in_new,
-                    url: bggLink,
-                    theme: theme,
-                  ),
-                  const SizedBox(width: 12),
-                  _HeroBannerButton(
-                    label: i18n.t(_namespace, 'app.manualButton'),
-                    icon: Icons.picture_as_pdf,
-                    url: 'https://example.com/castles-of-burgundy-manual.pdf', // TODO: Replace with real URL
-                    theme: theme,
-                  ),
-                ],
+              GameHeaderButtons(
+                gameId: _namespace,
               ),
               const SizedBox(height: 12),
               Text(
@@ -293,48 +276,3 @@ class _HeroBanner extends StatelessWidget {
   }
 }
 
-class _HeroBannerButton extends StatelessWidget {
-  final String label;
-  final IconData icon;
-  final String url;
-  final CoBThemeConfig theme;
-
-  const _HeroBannerButton({
-    required this.label,
-    required this.icon,
-    required this.url,
-    required this.theme,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SecureLink(
-      url: url,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-        decoration: BoxDecoration(
-          color: theme.themeData.colorScheme.primary.withOpacity(0.15),
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: theme.themeData.colorScheme.primary.withOpacity(0.3),
-          ),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, size: 16, color: theme.themeData.colorScheme.primary),
-            const SizedBox(width: 6),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: theme.themeData.colorScheme.primary,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

@@ -8,6 +8,7 @@ import '../../models/nav_item.dart';
 import '../../theme/game_theme_provider.dart';
 import '../../theme/quacks_theme.dart';
 import '../../utils/responsive.dart';
+import '../../widgets/game_header_buttons.dart';
 import '../../widgets/scroll_tracker.dart';
 import '../../widgets/side_nav/side_nav_notifier.dart';
 import 'sections/end_of_round_section.dart';
@@ -83,7 +84,7 @@ class _QuacksScreenState extends State<QuacksScreen> {
     final gameTitle = i18n.t(_namespace, 'app.title');
     final activeSection = _scrollTracker.activeSectionId;
 
-    // Build SideNav groups (Req 5.6)
+    // Build SideNav groups
     final sideNavGroups = [
       NavGroup(
         items: [
@@ -112,7 +113,7 @@ class _QuacksScreenState extends State<QuacksScreen> {
       sectionKeys: _sectionKeys,
     );
 
-    // Web tab title (Req 11.5)
+    // Web tab title
     if (kIsWeb) {
       content = Title(
         title: gameTitle,
@@ -157,10 +158,10 @@ class _QuacksBody extends StatelessWidget {
         return CustomScrollView(
           controller: scrollController,
           slivers: [
-            // Header (Req 8.1)
+            // Header
             SliverToBoxAdapter(child: _Header(i18n: i18n, theme: quacksTheme, maxWidth: maxWidth)),
 
-            // Section widgets as slivers (Req 8.2)
+            // Section widgets as slivers
             SliverToBoxAdapter(
               child: QuacksOverviewSection(
                   key: sectionKeys['overview'], i18n: i18n, theme: quacksTheme),
@@ -222,7 +223,11 @@ class _Header extends StatelessWidget {
                 style: theme.themeData.textTheme.headlineLarge,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 12),
+              GameHeaderButtons(
+                gameId: _namespace,
+              ),
+              const SizedBox(height: 12),
               Text(
                 i18n.t(_namespace, 'header.rulesReference'),
                 style: TextStyle(

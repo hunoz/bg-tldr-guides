@@ -70,7 +70,7 @@ class I18nService extends ChangeNotifier {
             final content = await assetBundle.loadString(path);
             _translations[ns]![locale] = json.decode(content);
           } catch (e) {
-            // Malformed JSON — skip this file (Req 6.8 error handling).
+            // Malformed JSON — skip this file.
             debugPrint('I18nService: failed to load $path: $e');
           }
         }

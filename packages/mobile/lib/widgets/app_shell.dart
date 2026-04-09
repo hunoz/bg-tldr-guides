@@ -76,9 +76,9 @@ class _AppShellState extends State<AppShell>
       body: Stack(
         children: [
           // Main content
-          widget.child,
+          SelectionArea(child: widget.child),
 
-          // Hamburger toggle button (Requirement 5.1)
+          // Hamburger toggle button
           Positioned(
             top: MediaQuery.of(context).padding.top + 8,
             left: 8,
@@ -88,7 +88,7 @@ class _AppShellState extends State<AppShell>
             ),
           ),
 
-          // SideNav drawer overlay (Requirement 5.2)
+          // SideNav drawer overlay
           if (_isDrawerOpen)
             SlideTransition(
               position: _slideAnimation,

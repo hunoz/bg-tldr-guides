@@ -16,6 +16,7 @@ dependencies:
   url_launcher: ^6.3.0
   google_fonts: ^6.2.1
   cupertino_icons: ^1.0.6
+  flutter_svg: ^2.0.10
 
 dev_dependencies:
   flutter_test:
@@ -29,3 +30,4 @@ flutter:
     - assets/i18n/common/
     - assets/i18n/castles-of-burgundy/
     - assets/i18n/quacks/
+    - assets/images/

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -25,14 +26,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Set theme to Home (Req 4.1)
+    // Set theme to Home
     final themeProvider =
         Provider.of<GameThemeProvider>(context, listen: false);
     if (themeProvider.config is! HomeThemeConfig) {
       themeProvider.setTheme(HomeThemeConfig());
     }
 
-    // On web, set browser tab title (Req 11.5)
+    // On web, set browser tab title
     if (kIsWeb) {
       final i18n = Provider.of<I18nService>(context, listen: false);
       _setWebTitle(i18n.t('common', 'title'));
@@ -51,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final games = buildGameList(i18n);
     final appTitle = i18n.t('common', 'title');
 
-    // Build SideNav groups: one group titled "Games" listing all games (Req 5.4, 5.5)
+    // Build SideNav groups: one group titled "Games" listing all games
     final sideNavGroups = [
       NavGroup(
         title: i18n.t('common', 'games'),
@@ -72,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Widget content = _HomeBody(i18n: i18n, games: games);
 
-    // Wrap with Title widget for web tab title (Req 11.5)
+    // Wrap with Title widget for web tab title
     if (kIsWeb) {
       content = Title(
         title: appTitle,
@@ -111,23 +112,23 @@ class _HomeBody extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // Hero section (Req 3.1)
+                  // Hero section
                   _HeroSection(i18n: i18n),
                   const SizedBox(height: 24),
 
-                  // Disclaimer banner (Req 3.2)
+                  // Disclaimer banner
                   _DisclaimerBanner(i18n: i18n),
                   const SizedBox(height: 32),
 
-                  // Feature cards (Req 3.3)
+                  // Feature cards
                   _FeatureCards(i18n: i18n),
                   const SizedBox(height: 32),
 
-                  // Available guides heading + game list (Req 3.4, 3.5, 3.7)
+                  // Available guides heading + game list
                   _GameList(i18n: i18n, games: games),
                   const SizedBox(height: 32),
 
-                  // CTA text (Req 3.6)
+                  // CTA text
                   Text(
                     i18n.t('common', 'home-cta'),
                     style: TextStyle(
@@ -156,7 +157,11 @@ class _HeroSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text('🎲', style: TextStyle(fontSize: 56)),
+        SvgPicture.asset(
+          'assets/images/dice.svg',
+          width: 200,
+          height: 200,
+        ),
         const SizedBox(height: 12),
         Text(
           i18n.t('common', 'title'),
@@ -217,7 +222,7 @@ class _DisclaimerBanner extends StatelessWidget {
   }
 }
 
-/// Three feature cards with responsive layout (Req 11.4).
+/// Three feature cards with responsive layout.
 class _FeatureCards extends StatelessWidget {
   final I18nService i18n;
 
@@ -254,6 +259,7 @@ class _FeatureCards extends StatelessWidget {
 
         if (cols == 1) {
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: features
                 .map((f) => Padding(
                       padding: const EdgeInsets.only(bottom: 12),

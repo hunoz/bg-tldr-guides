@@ -3,9 +3,7 @@
         "title": "The Castles of Burgundy",
         "subtitle": "A Plain-Language Play Guide",
         "footer": "🏰 The Castles of Burgundy — Play Guide 🏰",
-        "icon": "🏰",
-        "bggButton": "BGG Page",
-        "manualButton": "Official Manual"
+        "icon": "🏰"
     },
     "overview": {
         "heading": "What You're Trying to Do",

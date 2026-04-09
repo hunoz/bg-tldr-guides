@@ -20,11 +20,11 @@ import 'widgets/side_nav/side_nav_notifier.dart';
 /// configuration and flutter_localizations delegates.
 ///
 /// Platform-specific navigation is handled via [GoRouter] + [MaterialApp.router]:
-/// - iOS: Cupertino-style back swipe gesture (Req 11.1) via
+/// - iOS: Cupertino-style back swipe gesture via
 ///   [CupertinoPageTransitionsBuilder] in the theme's [pageTransitionsTheme].
-/// - Android: System back button (Req 11.2) via [GoRouter]'s built-in
+/// - Android: System back button via [GoRouter]'s built-in
 ///   [RootBackButtonDispatcher].
-/// - Web: Browser back/forward and URL bar (Req 11.3) via [GoRouter]'s
+/// - Web: Browser back/forward and URL bar via [GoRouter]'s
 ///   web integration through [routerConfig].
 ///
 class RuleSnapApp extends StatefulWidget {
