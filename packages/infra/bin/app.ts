@@ -16,7 +16,7 @@ function checkEnvironmentVariable(envVar: string): string {
 
 const zoneId = checkEnvironmentVariable('ZONE_ID');
 const zoneName = checkEnvironmentVariable('ZONE_NAME');
-const domainName = checkEnvironmentVariable('ZONE_NAME');
+const domainName = checkEnvironmentVariable('DOMAIN_NAME');
 const account = checkEnvironmentVariable('AWS_ACCOUNT');
 const region = checkEnvironmentVariable('AWS_REGION');
 
@@ -29,7 +29,7 @@ const dnsStack = new DnsStack(app, 'DnsStack', {
     env,
     zoneName,
     zoneId,
-})
+});
 
 new SpaStack(app, 'SpaStack', {
     env,

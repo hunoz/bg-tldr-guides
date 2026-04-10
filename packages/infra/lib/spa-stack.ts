@@ -1,13 +1,13 @@
 import { CfnOutput, Duration, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
 import { Certificate, CertificateValidation } from 'aws-cdk-lib/aws-certificatemanager';
-import { AllowedMethods, CachedMethods, CachePolicy, Distribution, HttpVersion, PriceClass, ResponseHeadersPolicy, SecurityPolicyProtocol, ViewerProtocolPolicy } from 'aws-cdk-lib/aws-cloudfront';
+import { AllowedMethods, CachedMethods, CachePolicy, Distribution, HttpVersion, IDistribution, PriceClass, ResponseHeadersPolicy, SecurityPolicyProtocol, ViewerProtocolPolicy } from 'aws-cdk-lib/aws-cloudfront';
 import { S3BucketOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { PolicyStatement, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
 import { Key } from 'aws-cdk-lib/aws-kms';
 import { ARecord, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
 import { BlockPublicAccess, Bucket, BucketEncryption, ObjectOwnership } from 'aws-cdk-lib/aws-s3';
-import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
+import { BucketDeployment, CacheControl, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
 import { join } from 'path';
 
@@ -17,6 +17,7 @@ export interface SpaStackProps extends StackProps {
 }
 
 export class SpaStack extends Stack {
+    public readonly distribution: IDistribution;
     constructor(scope: Construct, id: string, props: SpaStackProps) {
         super(scope, id, props);
 
@@ -54,10 +55,38 @@ export class SpaStack extends Stack {
         const certificate = new Certificate(this, 'Certificate', {
             domainName: props.domainName,
             validation: CertificateValidation.fromDns(props.hostedZone),
-        })
+        });
+
+        // Manuals bucket
+        const manualsKmsKey = new Key(this, 'ManualsKmsKey', {
+            description: 'KMS key for manuals S3 bucket encryption',
+            enableKeyRotation: true,
+        });
+        manualsKmsKey.addAlias(`${this.stackName}-manuals-key`);
+
+        manualsKmsKey.addToResourcePolicy(new PolicyStatement({
+            actions: ['kms:Decrypt', 'kms:GenerateDataKey*'],
+            principals: [new ServicePrincipal('cloudfront.amazonaws.com')],
+            resources: ['*'],
+            conditions: {
+                StringLike: {
+                    'aws:SourceArn': `arn:aws:cloudfront::${this.account}:distribution/*`,
+                },
+            },
+        }));
+
+        const manualsBucket = new Bucket(this, 'ManualsBucket', {
+            encryption: BucketEncryption.KMS,
+            encryptionKey: manualsKmsKey,
+            bucketKeyEnabled: true,
+            blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
+            objectOwnership: ObjectOwnership.BUCKET_OWNER_ENFORCED,
+            removalPolicy: RemovalPolicy.DESTROY,
+            autoDeleteObjects: true,
+        });
 
         // CloudFront distribution
-        const distribution = new Distribution(this, 'Distribution', {
+        this.distribution = new Distribution(this, 'Distribution', {
             defaultBehavior: {
                 origin: S3BucketOrigin.withOriginAccessControl(spaBucket),
                 viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
@@ -80,12 +109,37 @@ export class SpaStack extends Stack {
             ],
         });
 
+        // Add manuals behavior to CloudFront
+        (this.distribution as Distribution).addBehavior('manuals/*', S3BucketOrigin.withOriginAccessControl(manualsBucket), {
+            viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+            allowedMethods: AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
+            cachedMethods: CachedMethods.CACHE_GET_HEAD,
+            compress: true,
+            cachePolicy: CachePolicy.CACHING_OPTIMIZED,
+            responseHeadersPolicy: ResponseHeadersPolicy.SECURITY_HEADERS,
+        });
+
+        // Deploy manuals to S3
+        new BucketDeployment(this, 'DeployManuals', {
+            sources: [Source.asset(join(__dirname, 'manuals'))],
+            destinationBucket: manualsBucket,
+            destinationKeyPrefix: 'manuals',
+            distribution: this.distribution,
+            distributionPaths: ['/manuals/*'],
+        });
+
         // Deploy built SPA assets to S3 and invalidate CloudFront
         new BucketDeployment(this, 'DeployAssets', {
-            sources: [Source.asset(join(__dirname, '../../web/dist'))],
+            sources: [Source.asset(join(__dirname, '../../app/dist'))],
             destinationBucket: spaBucket,
-            distribution,
+            distribution: this.distribution,
             distributionPaths: ['/*'],
+            memoryLimit: 4096,
+            cacheControl: [
+                CacheControl.setPublic(),
+                CacheControl.maxAge(Duration.hours(1)),
+                CacheControl.sMaxAge(Duration.days(7)),
+            ],
         });
 
         const subdomainReplaced = props.domainName.replaceAll(`.${props.hostedZone.zoneName}`, '');
@@ -96,14 +150,14 @@ export class SpaStack extends Stack {
             zone: props.hostedZone,
             recordName: subdomain,
             target: RecordTarget.fromAlias(
-                new CloudFrontTarget(distribution),
+                new CloudFrontTarget(this.distribution),
             ),
         })
 
         // Outputs
         new CfnOutput(this, 'BucketName', { value: spaBucket.bucketName });
-        new CfnOutput(this, 'DistributionId', { value: distribution.distributionId });
-        new CfnOutput(this, 'DistributionDomainName', { value: distribution.distributionDomainName });
+        new CfnOutput(this, 'DistributionId', { value: this.distribution.distributionId });
+        new CfnOutput(this, 'DistributionDomainName', { value: this.distribution.distributionDomainName });
         new CfnOutput(this, 'KmsKeyArn', { value: kmsKey.keyArn });
     }
 }

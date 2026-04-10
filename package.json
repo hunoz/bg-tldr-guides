@@ -2,14 +2,16 @@
     "private": true,
     "packageManager": "pnpm@8.15.1",
     "scripts": {
-        "web:dev": "pnpm --filter @rulesnap/web dev",
-        "web:format": "pnpm --filter @rulesnap/web format",
-        "web:lint:fix": "pnpm --filter @rulesnap/web lint:fix",
-        "web:lint:check": "pnpm --filter @rulesnap/web lint:check",
-        "web:build": "pnpm --filter @rulesnap/web build",
+        "app:start": "pnpm --filter @rulesnap/app web",
+        "app:format": "pnpm --filter @rulesnap/app format",
+        "app:lint:fix": "pnpm --filter @rulesnap/app lint:fix",
+        "app:lint:check": "pnpm --filter @rulesnap/app lint:check",
+        "app:build": "pnpm --filter @rulesnap/app build",
+        "app:ios": "pnpm --filter @rulesnap/app ios",
+        "app:android": "pnpm --filter @rulesnap/app android",
         "infra:synth": "pnpm --filter @rulesnap/infra synth",
-        "infra:bootstrap": "pnpm web:build && pnpm --filter @rulesnap/infra bootstrap",
-        "infra:deploy": "pnpm web:build && pnpm --filter @rulesnap/infra run deploy",
+        "infra:bootstrap": "pnpm app:build && pnpm --filter @rulesnap/infra bootstrap",
+        "infra:deploy": "pnpm app:build && pnpm --filter @rulesnap/infra run deploy",
         "infra:diff": "pnpm --filter @rulesnap/infra diff"
     }
 }

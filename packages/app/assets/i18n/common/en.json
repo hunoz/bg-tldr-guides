@@ -1,0 +1,16 @@
+{
+    "title": "Board Game Guides",
+    "home": "Home",
+    "all-games": "All Games",
+    "games": "Games",
+    "home-subtitle": "Quick setup & play references for your favorite tabletop games.",
+    "home-disclaimer": "These guides are not meant to replace the official rulebook. They're quick-start references to help you set up and play faster.",
+    "home-cta": "Pick a game from the menu to get started.",
+    "home-feature-setup": "Fast Setup",
+    "home-feature-setup-desc": "Get to the table quicker with streamlined setup steps.",
+    "home-feature-play": "Play Reference",
+    "home-feature-play-desc": "Key rules at a glance so you spend less time flipping pages.",
+    "home-feature-scoring": "Scoring Cheat Sheet",
+    "home-feature-scoring-desc": "End-of-game scoring broken down into simple checks.",
+    "available-guides": "Available Guides"
+}
