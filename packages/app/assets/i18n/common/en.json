@@ -12,5 +12,9 @@
     "home-feature-play-desc": "Key rules at a glance so you spend less time flipping pages.",
     "home-feature-scoring": "Scoring Cheat Sheet",
     "home-feature-scoring-desc": "End-of-game scoring broken down into simple checks.",
-    "available-guides": "Available Guides"
+    "available-guides": "Available Guides",
+    "manualButton": "Official Manual",
+    "search-games": "Search games",
+    "bggButton": "BGG Page",
+    "noGamesFound": "No games found"
 }

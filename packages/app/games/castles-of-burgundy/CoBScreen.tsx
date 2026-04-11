@@ -46,6 +46,7 @@ const sectionComponents: Record<string, React.ComponentType> = {
  * Renders a scrollable guide with hero banner, 9 content sections, and footer.
  */
 export function CoBScreen() {
+  const common = useTranslation('common');
   const { t, i18n: i18nInstance } = useTranslation('castles-of-burgundy');
   const theme = useTheme();
   const router = useRouter();
@@ -117,11 +118,11 @@ export function CoBScreen() {
         <View style={styles.heroButtons}>
           <ThemedLinkButton
             href="https://boardgamegeek.com/boardgame/271320/the-castles-of-burgundy"
-            label="BoardGameGeek"
+            label={common.t('bggButton')}
           />
           <ThemedLinkButton
             href={getManualUrl('castles-of-burgundy')}
-            label="Official Manual"
+            label={common.t('manualButton')}
           />
         </View>
       </View>

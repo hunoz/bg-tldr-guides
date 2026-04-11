@@ -84,7 +84,7 @@ export default function HomeScreen() {
         <Text style={styles.gameListHeading}>{t('available-guides')}</Text>
         <TextInput
           style={styles.searchInput}
-          placeholder="🔍 Search games..."
+          placeholder={`🔍 ${t('search-games')}`}
           placeholderTextColor="#6a6880"
           value={search}
           onChangeText={setSearch}
@@ -104,7 +104,7 @@ export default function HomeScreen() {
           </TouchableOpacity>
         ))}
         {filteredGameIds.length === 0 && (
-          <Text style={styles.noResults}>No games found.</Text>
+          <Text style={styles.noResults}>{t('noGamesFound')}</Text>
         )}
       </View>
 

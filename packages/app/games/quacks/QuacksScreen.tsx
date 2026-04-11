@@ -43,6 +43,7 @@ const sectionLabels: Record<string, string | null> = {
  * Renders a scrollable guide with header, 5 content sections, and footer.
  */
 export function QuacksScreen() {
+  const common = useTranslation('common');
   const { t, i18n: i18nInstance } = useTranslation('quacks');
   const theme = useTheme();
   const router = useRouter();
@@ -114,11 +115,11 @@ export function QuacksScreen() {
         <View style={styles.headerButtons}>
           <ThemedLinkButton
             href="https://boardgamegeek.com/boardgame/244521/the-quacks-of-quedlinburg"
-            label="BoardGameGeek"
+            label={common.t('bggButton')}
           />
           <ThemedLinkButton
             href={getManualUrl('quacks')}
-            label="Official Manual"
+            label={common.t('manualsButton')}
           />
         </View>
       </View>

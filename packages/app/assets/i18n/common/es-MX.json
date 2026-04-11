@@ -12,5 +12,9 @@
     "home-feature-play-desc": "Reglas clave de un vistazo para pasar menos tiempo buscando en el manual.",
     "home-feature-scoring": "Hoja de puntuación",
     "home-feature-scoring-desc": "Puntuación de fin de partida desglosada en pasos simples.",
-    "available-guides": "Guías disponibles"
+    "available-guides": "Guías disponibles",
+    "search-games": "Buscar juegos",
+    "bggButton": "Página BGG",
+    "manualButton": "Manual oficial",
+    "noGamesFound": "No se encontraron juegos"
 }

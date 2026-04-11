@@ -1,9 +1,7 @@
 import { CfnOutput, Duration, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
 import { Certificate, CertificateValidation } from 'aws-cdk-lib/aws-certificatemanager';
-import { AllowedMethods, CachedMethods, CachePolicy, Distribution, HttpVersion, IDistribution, PriceClass, ResponseHeadersPolicy, SecurityPolicyProtocol, ViewerProtocolPolicy } from 'aws-cdk-lib/aws-cloudfront';
+import { AllowedMethods, CachedMethods, CachePolicy, Distribution, Function as CfFunction, FunctionCode, FunctionEventType, FunctionRuntime, HttpVersion, IDistribution, PriceClass, ResponseHeadersPolicy, SecurityPolicyProtocol, ViewerProtocolPolicy } from 'aws-cdk-lib/aws-cloudfront';
 import { S3BucketOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
-import { PolicyStatement, ServicePrincipal } from 'aws-cdk-lib/aws-iam';
-import { Key } from 'aws-cdk-lib/aws-kms';
 import { ARecord, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
 import { BlockPublicAccess, Bucket, BucketEncryption, ObjectOwnership } from 'aws-cdk-lib/aws-s3';
@@ -21,35 +19,7 @@ export class SpaStack extends Stack {
     constructor(scope: Construct, id: string, props: SpaStackProps) {
         super(scope, id, props);
 
-        // KMS key for S3 encryption
-        const kmsKey = new Key(this, 'S3KmsKey', {
-            description: 'KMS key for SPA S3 bucket encryption',
-            enableKeyRotation: true,
-        });
-        kmsKey.addAlias(`${this.stackName}-spa-key`);
-
-        // Grant CloudFront service principal KMS decrypt
-        kmsKey.addToResourcePolicy(new PolicyStatement({
-            actions: ['kms:Decrypt', 'kms:GenerateDataKey*'],
-            principals: [new ServicePrincipal('cloudfront.amazonaws.com')],
-            resources: ['*'],
-            conditions: {
-                StringLike: {
-                    'aws:SourceArn': `arn:aws:cloudfront::${this.account}:distribution/*`,
-                },
-            },
-        }));
-
-        // SPA hosting bucket
-        const spaBucket = new Bucket(this, 'SpaBucket', {
-            encryption: BucketEncryption.KMS,
-            encryptionKey: kmsKey,
-            bucketKeyEnabled: true,
-            blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
-            objectOwnership: ObjectOwnership.BUCKET_OWNER_ENFORCED,
-            removalPolicy: RemovalPolicy.DESTROY,
-            autoDeleteObjects: true,
-        });
+        const spaBucket = this.createBucket('Spa');
 
         // SSL
         const certificate = new Certificate(this, 'Certificate', {
@@ -57,32 +27,12 @@ export class SpaStack extends Stack {
             validation: CertificateValidation.fromDns(props.hostedZone),
         });
 
-        // Manuals bucket
-        const manualsKmsKey = new Key(this, 'ManualsKmsKey', {
-            description: 'KMS key for manuals S3 bucket encryption',
-            enableKeyRotation: true,
-        });
-        manualsKmsKey.addAlias(`${this.stackName}-manuals-key`);
+        const manualsBucket = this.createBucket('Manuals');
 
-        manualsKmsKey.addToResourcePolicy(new PolicyStatement({
-            actions: ['kms:Decrypt', 'kms:GenerateDataKey*'],
-            principals: [new ServicePrincipal('cloudfront.amazonaws.com')],
-            resources: ['*'],
-            conditions: {
-                StringLike: {
-                    'aws:SourceArn': `arn:aws:cloudfront::${this.account}:distribution/*`,
-                },
-            },
-        }));
-
-        const manualsBucket = new Bucket(this, 'ManualsBucket', {
-            encryption: BucketEncryption.KMS,
-            encryptionKey: manualsKmsKey,
-            bucketKeyEnabled: true,
-            blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
-            objectOwnership: ObjectOwnership.BUCKET_OWNER_ENFORCED,
-            removalPolicy: RemovalPolicy.DESTROY,
-            autoDeleteObjects: true,
+        const ogMetaFunction = new CfFunction(this, 'OgMetaFunction', {
+            code: FunctionCode.fromFile({ filePath: join(__dirname, 'functions', 'og-meta-function.js') }),
+            runtime: FunctionRuntime.JS_2_0,
+            comment: 'Returns OG meta tags for crawlers, passes through for browsers',
         });
 
         // CloudFront distribution
@@ -95,6 +45,12 @@ export class SpaStack extends Stack {
                 compress: true,
                 cachePolicy: CachePolicy.CACHING_OPTIMIZED,
                 responseHeadersPolicy: ResponseHeadersPolicy.SECURITY_HEADERS,
+                functionAssociations: [
+                    {
+                        function: ogMetaFunction,
+                        eventType: FunctionEventType.VIEWER_REQUEST,
+                    },
+                ],
             },
             defaultRootObject: 'index.html',
             httpVersion: HttpVersion.HTTP2_AND_3,
@@ -158,6 +114,15 @@ export class SpaStack extends Stack {
         new CfnOutput(this, 'BucketName', { value: spaBucket.bucketName });
         new CfnOutput(this, 'DistributionId', { value: this.distribution.distributionId });
         new CfnOutput(this, 'DistributionDomainName', { value: this.distribution.distributionDomainName });
-        new CfnOutput(this, 'KmsKeyArn', { value: kmsKey.keyArn });
+    }
+
+    private createBucket(id: string): Bucket {
+        return new Bucket(this, `${id}Bucket`, {
+            encryption: BucketEncryption.S3_MANAGED,
+            blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
+            objectOwnership: ObjectOwnership.BUCKET_OWNER_ENFORCED,
+            removalPolicy: RemovalPolicy.DESTROY,
+            autoDeleteObjects: true,
+        });
     }
 }
