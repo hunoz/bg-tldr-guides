@@ -81,6 +81,96 @@
             }
         }
     },
-    "endOfRound": {},
-    "finalRound": {}
+    "endOfRound": {
+        "title": "📜 End of Round Checklist",
+        "bonusDie": {
+            "header": "a) Bonus Die",
+            "description": "The player who reached the farthest final space <em>without exploding</em> rolls the bonus die. Ties: all tied players roll.",
+            "finalSpaceNote": "Your \"final space\" is the space immediately after your last placed token.",
+            "rewardsHeader": "Possible Rewards",
+            "reward1": "+1 Victory Point",
+            "reward2": "+2 Victory Points",
+            "reward3": "+1 Ruby",
+            "reward4": "Advance Droplet 1 Space",
+            "reward5": "<span className='qk-token qk-token-orange'></span> Orange 1 Token"
+        },
+        "ingredientEffects": {
+            "header": "b) Post-Draw Ingredient Effects",
+            "description": "Resolve <span className='qk-token qk-token-green'></span> Green → <span className='qk-token qk-token-purple'></span> Purple → <span className='qk-token qk-token-black'></span> Black effects now."
+        },
+        "bonusRubies": {
+            "header": "c) Bonus Rubies",
+            "description": "If your final space shows a ruby icon, take 1 ruby."
+        },
+        "scoring": {
+            "header": "d) Scoring",
+            "outcome": "Outcome",
+            "reward": "Reward",
+            "didntExplode": "Didn't explode",
+            "didntExplodeReward": "Score victory points <strong>and</strong> shop",
+            "exploded": "Exploded",
+            "explodedReward": "Choose <strong>one</strong>: score victory points <strong>or</strong> shop",
+            "vpNote": "Victory points earned = the number shown in the small square on your final space."
+        },
+        "shopping": {
+            "header": "e) Shopping",
+            "description": "Starting player goes first, then clockwise. Spend the money value shown on your final space.",
+            "buyTokens": "Buy <strong>1 or 2 tokens</strong> — if 2, they must be <strong>different colors</strong>.",
+            "costsListed": "Costs are listed on the ingredient books.",
+            "limitedSupply": "Token supply is limited — once gone, they're gone!",
+            "unspentMoney": "Unspent money is lost.",
+            "availability": "<strong>Availability:</strong> <span className='qk-token qk-token-yellow'></span> Yellow mandrakes from Round 2 · <span className='qk-token qk-token-purple'></span> Purple ghosts from Round 3",
+            "returnTokens": "After shopping, return all cauldron tokens + new purchases to your bag."
+        },
+        "spendRubies": {
+            "header": "f) Spend Rubies (Optional)",
+            "description": "Spend <strong>2 rubies</strong> per action, as many times as you can afford:",
+            "action": "Action",
+            "effect": "Effect",
+            "refillFlask": "Refill Flask",
+            "refillFlaskEffect": "Flip back to full side",
+            "advanceDroplet": "Advance Droplet",
+            "advanceDropletEffect": "Move 1 space forward (permanent)"
+        },
+        "rats": {
+            "header": "g) Rats — Catch-Up Mechanism 🐀",
+            "description": "Every player <em>except</em> the scoring leader:",
+            "step1": "Place your rat marker on your droplet.",
+            "step2": "Count the rat tails on the scoreboard between you and the leader.",
+            "step3": "Advance your rat marker that many spaces — this is your starting position next round.",
+            "note": "<strong>Note:</strong> The rat marker resets each round. If you're closer to the leader next round, it moves back. If further away, it moves even further forward. The rats never help the lead player. Skip this step in the final round."
+        },
+        "nextRound": {
+            "header": "h) Advance to Next Round",
+            "moveFlame": "Move the flame marker forward one space.",
+            "passDeck": "Pass the fortune deck clockwise to the new starting player.",
+            "tokensInBag": "All tokens should be back in your bag.",
+            "round6Special": "<strong>Round 6 special:</strong> Every player adds 1 extra <span className='qk-token qk-token-white'></span> White 1 Bloomberry to their bag."
+        }
+    },
+    "finalRound": {
+        "title": "🏆 Final Round (Round 9)",
+        "intro": "Played normally with these exceptions:",
+        "noShopping": {
+            "header": "No Shopping",
+            "description": "Instead, convert resources to victory points:"
+        },
+        "conversion": {
+            "cost": "Cost",
+            "reward": "Reward",
+            "fiveMoney": "5 money",
+            "oneVP": "1 victory point",
+            "twoRubies": "2 rubies",
+            "oneVPAlt": "1 victory point"
+        },
+        "finalScoring": {
+            "header": "Final Scoring",
+            "description": "Highest victory point total wins."
+        },
+        "tiebreaker": {
+            "header": "Tiebreaker",
+            "farthestSpace": "Farthest final space in the last round.",
+            "sharedVictory": "Still tied → shared victory."
+        }
+    }
 }

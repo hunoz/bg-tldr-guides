@@ -119,7 +119,7 @@ export function QuacksScreen() {
           />
           <ThemedLinkButton
             href={getManualUrl('quacks')}
-            label={common.t('manualsButton')}
+            label={common.t('manualButton')}
           />
         </View>
       </View>

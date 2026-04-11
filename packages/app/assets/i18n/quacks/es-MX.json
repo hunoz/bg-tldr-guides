@@ -1,5 +1,177 @@
 {
     "app": {
-        "title": "Los Quacks de Quedlinburg"
+        "title": "Los Quacks de Quedlinburg",
+        "icon": "⚗️",
+        "subtitle": "Una guía de juego en lenguaje simple"
+    },
+    "header": {
+        "rulesReference": "Referencia de reglas"
+    },
+    "overview": {
+        "rounds": "Rondas",
+        "turns": "Giros",
+        "simultaneous": "Simultáneo",
+        "goal": "Meta",
+        "mostVictoryPoints": "La mayoría de los puntos de victoria"
+    },
+    "setup": {
+        "title": "Configuración",
+        "tableSetup": {
+            "header": "Configuración de la tabla",
+            "shuffleFortuneTellerDeck": "Baraja la baraja del adivino boca abajo en una pila.",
+            "flameMarkerPlacement": "Coloque el marcador de llama en el espacio <strong>1</strong> de la pista redonda.",
+            "chooseIngredientBooks": "Elija un conjunto de libros de ingredientes (numerados 1-4 por número de marcadores). Elija un libro<span className='qk-token qk-token-orange'></span> naranja (calabaza) y un libro<span className='qk-token qk-token-black'></span> negro (polilla). Voltee cada uno hacia el lado que coincida con su número de jugadores (mostrado por los iconos de caldero en la esquina inferior izquierda).",
+            "sortIngredientTokens": "Clasifique las fichas de ingredientes en pilas por valor: <strong>1s</strong>, <strong>2s</strong>, y <strong>3+</strong>. Los colores se mezclarán en pilas, esto es intencional."
+        },
+        "perPlayerSetup": {
+            "header": "Configuración por jugador",
+            "eachPlayerReceives": "Cada jugador recibe",
+            "oneCauldronBoard": "<strong>1 tabla de caldero</strong> — con el lado del libro hacia arriba (no tubos de ensayo)",
+            "oneScoringMarker": "<strong>1 marcador de puntuación</strong> (color coincidente) → colocar junto al espacio 1 en la pista de puntuación",
+            "onePlayerMarker": "<strong>Marcador de 1 jugador</strong> → colocar en el espacio 0 (lado cero hacia arriba)",
+            "oneBag": "<strong>1 bolsa</strong>",
+            "oneRuby": "<strong>1 rubí</strong> → lugar a la izquierda de su caldero",
+            "oneFlask": "<strong>1 matraz</strong> → colocar el lado completo hacia arriba en la bandeja plateada",
+            "oneDropletMarker": "<strong>Marcador de 1 gota</strong> → colóquese en el primer espacio central de su caldero",
+            "oneRatMarker": "<strong>1 marcador de rata</strong> → colocar en el tazón",
+            "startingBagContents": {
+                "header": "Contenido de la bolsa de partida (9 fichas)",
+                "token": "Token",
+                "qty": "Qty",
+                "white1Bloomberry": "<span className='qk-token qk-token-white'></span>Blanco 1 — Bloomberry",
+                "white2Bloomberry": "<span className='qk-token qk-token-white'></span>Blanco 2 — Bloomberry",
+                "white3Bloomberry": "<span className='qk-token qk-token-white'></span>Blanco 3 — Bloomberry",
+                "orange1Pumpkin": "<span className='qk-token qk-token-orange'></span>Naranja 1 — Calabaza",
+                "green1Spider": "<span className='qk-token qk-token-green'></span>Verde 1 — Araña"
+            }
+        },
+        "scoringNote": "<strong>Nota de puntuación:</strong> Si un jugador cruza 50 puntos, voltee el marcador de puntuación a su lado \"50\" y continúe desde el principio de la pista."
+    },
+    "roundStructure": {
+        "title": "Estructura Redonda",
+        "stepOne": {
+            "title": "Rotar el reproductor de inicio",
+            "passClockwise": "Pase en el sentido de las agujas del reloj en cada ronda."
+        },
+        "stepTwo": {
+            "title": "Dibuja una fortuna",
+            "drawFortuneTellerCard": "El jugador inicial se basa en la baraja del adivino.",
+            "purpleCards": "<span className='qk-fortune-purple'>Cartas moradas</span>: resuelva inmediatamente, luego deseche.",
+            "blueCards": "<span className='qk-fortune-blue'>Tarjetas azules</span>: permanecen vigentes hasta el final de la ronda; manténlas visibles.",
+            "note": "<strong>Nota:</strong> Si una tarjeta hace referencia a mandrágoras<span className='qk-token qk-token-yellow'></span> amarillas o <span className='qk-token qk-token-purple'></span> fantasmas morados y aún no están en el juego, ignore esa parte."
+        },
+        "stepThree": {
+            "title": "Dibujar ingredientes (simultáneo)",
+            "drawTokens": "Todos los jugadores sacan fichas una a la vez de sus bolsas y las colocan en sus calderos.",
+            "placement": {
+                "title": "Colocación",
+                "tokenAdvancement": "Cada ficha lo adelanta por su valor impreso, medido a partir de su última ficha colocada (o su posición inicial para el primer sorteo)."
+            },
+            "stopping": {
+                "title": "Deteniéndose",
+                "voluntaryStop": "Puede dejar de hacerlo voluntariamente en cualquier momento. Si llega al último espacio del caldero, coloque la ficha allí y detente."
+            },
+            "exploding": {
+                "title": "Explosión",
+                "exploded": "<strong>Si el valor total de todas las moras<span className='qk-token qk-token-white'></span> blancas en su caldero supera 7, ¡explota!</strong> Coloque la ficha que lo causó, luego deténgalo inmediatamente."
+            },
+            "rules": {
+                "title": "Reglas",
+                "doNotLookInBag": "Puede que <strong>nunca</strong> mire dentro de su bolso.",
+                "flaskUsage": "<strong>Frasco:</strong> Después de dibujar una fresa que <em>no</em> le haga explotar, puede devolverla a su bolsa y voltear su matraz hacia su lado vacío. No puede usar el matraz en una ficha que podría causar una explosión."
+            }
+        }
+    },
+    "endOfRound": {
+        "title": "📜 Lista de Fin de Ronda",
+        "bonusDie": {
+            "header": "a) Dado de Bonificación",
+            "description": "El jugador que alcanzó el espacio final más lejano <em>sin explotar</em> lanza el dado de bonificación. Empates: todos los jugadores empatados lanzan.",
+            "finalSpaceNote": "Tu \"espacio final\" es el espacio inmediatamente después de tu última ficha colocada.",
+            "rewardsHeader": "Posibles Recompensas",
+            "reward1": "+1 Punto de Victoria",
+            "reward2": "+2 Puntos de Victoria",
+            "reward3": "+1 Rubí",
+            "reward4": "Avanzar Gota 1 Espacio",
+            "reward5": "<span className='qk-token qk-token-orange'></span> Ficha Naranja 1"
+        },
+        "ingredientEffects": {
+            "header": "b) Efectos de Ingredientes Post-Extracción",
+            "description": "Resuelve <span className='qk-token qk-token-green'></span> Verde → <span className='qk-token qk-token-purple'></span> Púrpura → <span className='qk-token qk-token-black'></span> Negro efectos ahora."
+        },
+        "bonusRubies": {
+            "header": "c) Rubíes de Bonificación",
+            "description": "Si tu espacio final muestra un icono de rubí, toma 1 rubí."
+        },
+        "scoring": {
+            "header": "d) Puntuación",
+            "outcome": "Resultado",
+            "reward": "Recompensa",
+            "didntExplode": "No explotó",
+            "didntExplodeReward": "Anota puntos de victoria <strong>y</strong> compra",
+            "exploded": "Explotó",
+            "explodedReward": "Elige <strong>uno</strong>: anotar puntos de victoria <strong>o</strong> comprar",
+            "vpNote": "Puntos de victoria ganados = el número mostrado en el pequeño cuadrado de tu espacio final."
+        },
+        "shopping": {
+            "header": "e) Compras",
+            "description": "El jugador inicial va primero, luego en sentido horario. Gasta el valor de dinero mostrado en tu espacio final.",
+            "buyTokens": "Compra <strong>1 o 2 fichas</strong> — si son 2, deben ser de <strong>colores diferentes</strong>.",
+            "costsListed": "Los costos están listados en los libros de ingredientes.",
+            "limitedSupply": "El suministro de fichas es limitado — ¡una vez agotadas, se acabaron!",
+            "unspentMoney": "El dinero no gastado se pierde.",
+            "availability": "<strong>Disponibilidad:</strong> <span className='qk-token qk-token-yellow'></span> Mandrágoras amarillas desde la Ronda 2 · <span className='qk-token qk-token-purple'></span> Fantasmas púrpuras desde la Ronda 3",
+            "returnTokens": "Después de comprar, devuelve todas las fichas del caldero + nuevas compras a tu bolsa."
+        },
+        "spendRubies": {
+            "header": "f) Gastar Rubíes (Opcional)",
+            "description": "Gasta <strong>2 rubíes</strong> por acción, tantas veces como puedas pagar:",
+            "action": "Acción",
+            "effect": "Efecto",
+            "refillFlask": "Rellenar Matraz",
+            "refillFlaskEffect": "Voltear al lado lleno",
+            "advanceDroplet": "Avanzar Gota",
+            "advanceDropletEffect": "Mover 1 espacio hacia adelante (permanente)"
+        },
+        "rats": {
+            "header": "g) Ratas — Mecanismo de Recuperación 🐀",
+            "description": "Cada jugador <em>excepto</em> el líder de puntuación:",
+            "step1": "Coloca tu marcador de rata en tu gota.",
+            "step2": "Cuenta las colas de rata en el marcador entre tú y el líder.",
+            "step3": "Avanza tu marcador de rata esa cantidad de espacios — esta es tu posición inicial en la próxima ronda.",
+            "note": "<strong>Nota:</strong> El marcador de rata se reinicia cada ronda. Si estás más cerca del líder en la próxima ronda, retrocede. Si estás más lejos, avanza aún más. Las ratas nunca ayudan al jugador líder. Omite este paso en la ronda final."
+        },
+        "nextRound": {
+            "header": "h) Avanzar a la Siguiente Ronda",
+            "moveFlame": "Mueve el marcador de llama un espacio hacia adelante.",
+            "passDeck": "Pasa la baraja de fortuna en sentido horario al nuevo jugador inicial.",
+            "tokensInBag": "Todas las fichas deben estar de vuelta en tu bolsa.",
+            "round6Special": "<strong>Especial Ronda 6:</strong> Cada jugador agrega 1 extra <span className='qk-token qk-token-white'></span> Blanco 1 Bloomberry a su bolsa."
+        }
+    },
+    "finalRound": {
+        "title": "🏆 Ronda Final (Ronda 9)",
+        "intro": "Se juega normalmente con estas excepciones:",
+        "noShopping": {
+            "header": "Sin Compras",
+            "description": "En su lugar, convierte recursos en puntos de victoria:"
+        },
+        "conversion": {
+            "cost": "Costo",
+            "reward": "Recompensa",
+            "fiveMoney": "5 monedas",
+            "oneVP": "1 punto de victoria",
+            "twoRubies": "2 rubíes",
+            "oneVPAlt": "1 punto de victoria"
+        },
+        "finalScoring": {
+            "header": "Puntuación Final",
+            "description": "El total más alto de puntos de victoria gana."
+        },
+        "tiebreaker": {
+            "header": "Desempate",
+            "farthestSpace": "El espacio final más lejano en la última ronda.",
+            "sharedVictory": "Aún empatados → victoria compartida."
+        }
     }
 }
