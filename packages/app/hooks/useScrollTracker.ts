@@ -1,23 +1,23 @@
 import { useCallback, useRef, useState } from 'react';
 import {
-  type LayoutChangeEvent,
-  type NativeScrollEvent,
-  type NativeSyntheticEvent,
-  type ScrollView,
-  useWindowDimensions,
+    type LayoutChangeEvent,
+    type NativeScrollEvent,
+    type NativeSyntheticEvent,
+    type ScrollView,
+    useWindowDimensions,
 } from 'react-native';
 
 export interface UseScrollTrackerReturn {
-  /** Attach to ScrollView's onScroll */
-  handleScroll: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
-  /** Returns an onLayout handler for a given section id */
-  getSectionLayoutHandler: (id: string) => (event: LayoutChangeEvent) => void;
-  /** Scroll to a section by id */
-  scrollToSection: (id: string) => void;
-  /** Currently active section id */
-  activeId: string | null;
-  /** Ref to attach to ScrollView */
-  scrollViewRef: React.RefObject<ScrollView>;
+    /** Attach to ScrollView's onScroll */
+    handleScroll: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
+    /** Returns an onLayout handler for a given section id */
+    getSectionLayoutHandler: (id: string) => (event: LayoutChangeEvent) => void;
+    /** Scroll to a section by id */
+    scrollToSection: (id: string) => void;
+    /** Currently active section id */
+    activeId: string | null;
+    /** Ref to attach to ScrollView */
+    scrollViewRef: React.RefObject<ScrollView>;
 }
 
 /**
@@ -32,23 +32,23 @@ export interface UseScrollTrackerReturn {
  * @returns The active section ID, or null if none qualifies
  */
 export function findActiveSection(
-  sectionOffsets: Map<string, number>,
-  sectionIds: string[],
-  scrollY: number,
-  viewportMargin: number,
+    sectionOffsets: Map<string, number>,
+    sectionIds: string[],
+    scrollY: number,
+    viewportMargin: number,
 ): string | null {
-  const threshold = scrollY + viewportMargin;
-  let activeId: string | null = null;
+    const threshold = scrollY + viewportMargin;
+    let activeId: string | null = null;
 
-  for (const id of sectionIds) {
-    const offset = sectionOffsets.get(id);
-    if (offset === undefined) continue;
-    if (offset <= threshold) {
-      activeId = id;
+    for (const id of sectionIds) {
+        const offset = sectionOffsets.get(id);
+        if (offset === undefined) continue;
+        if (offset <= threshold) {
+            activeId = id;
+        }
     }
-  }
 
-  return activeId;
+    return activeId;
 }
 
 /** Default padding subtracted from the section offset before scrolling */
@@ -65,13 +65,13 @@ export const SCROLL_PADDING = 20;
  * @returns The y value to scroll to, or null if the section is unknown
  */
 export function computeScrollTarget(
-  sectionOffsets: Map<string, number>,
-  id: string,
-  scrollPadding: number = SCROLL_PADDING,
+    sectionOffsets: Map<string, number>,
+    id: string,
+    scrollPadding: number = SCROLL_PADDING,
 ): number | null {
-  const offset = sectionOffsets.get(id);
-  if (offset === undefined) return null;
-  return Math.max(0, offset - scrollPadding);
+    const offset = sectionOffsets.get(id);
+    if (offset === undefined) return null;
+    return Math.max(0, offset - scrollPadding);
 }
 
 /**
@@ -82,49 +82,49 @@ export function computeScrollTarget(
  * @param sectionIds - Ordered list of section IDs to track
  */
 export function useScrollTracker(sectionIds: string[]): UseScrollTrackerReturn {
-  const sectionOffsets = useRef<Map<string, number>>(new Map());
-  const scrollViewRef = useRef<ScrollView>(null);
-  const [activeId, setActiveId] = useState<string | null>(null);
-  const { height: viewportHeight } = useWindowDimensions();
+    const sectionOffsets = useRef<Map<string, number>>(new Map());
+    const scrollViewRef = useRef<ScrollView>(null);
+    const [activeId, setActiveId] = useState<string | null>(null);
+    const { height: viewportHeight } = useWindowDimensions();
 
-  const handleScroll = useCallback(
-    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-      const scrollY = event.nativeEvent.contentOffset.y;
-      const margin = viewportHeight * 0.2;
+    const handleScroll = useCallback(
+        (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+            const scrollY = event.nativeEvent.contentOffset.y;
+            const margin = viewportHeight * 0.2;
 
-      const newActiveId = findActiveSection(
-        sectionOffsets.current,
-        sectionIds,
-        scrollY,
-        margin,
-      );
+            const newActiveId = findActiveSection(
+                sectionOffsets.current,
+                sectionIds,
+                scrollY,
+                margin,
+            );
 
-      setActiveId(newActiveId);
-    },
-    [sectionIds, viewportHeight],
-  );
+            setActiveId(newActiveId);
+        },
+        [sectionIds, viewportHeight],
+    );
 
-  const getSectionLayoutHandler = useCallback(
-    (id: string) => (event: LayoutChangeEvent) => {
-      sectionOffsets.current.set(id, event.nativeEvent.layout.y);
-    },
-    [],
-  );
+    const getSectionLayoutHandler = useCallback(
+        (id: string) => (event: LayoutChangeEvent) => {
+            sectionOffsets.current.set(id, event.nativeEvent.layout.y);
+        },
+        [],
+    );
 
-  const scrollToSection = useCallback((id: string) => {
-    if (!scrollViewRef.current) return;
+    const scrollToSection = useCallback((id: string) => {
+        if (!scrollViewRef.current) return;
 
-    const y = computeScrollTarget(sectionOffsets.current, id);
-    if (y === null) return;
+        const y = computeScrollTarget(sectionOffsets.current, id);
+        if (y === null) return;
 
-    scrollViewRef.current.scrollTo({ y, animated: true });
-  }, []);
+        scrollViewRef.current.scrollTo({ y, animated: true });
+    }, []);
 
-  return {
-    handleScroll,
-    getSectionLayoutHandler,
-    scrollToSection,
-    activeId,
-    scrollViewRef,
-  };
+    return {
+        handleScroll,
+        getSectionLayoutHandler,
+        scrollToSection,
+        activeId,
+        scrollViewRef,
+    };
 }

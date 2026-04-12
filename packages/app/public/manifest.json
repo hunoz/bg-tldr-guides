@@ -1,21 +1,21 @@
 {
-  "short_name": "RuleSnap",
-  "name": "Rule Snap",
-  "description": "Quick-reference board game manuals",
-  "icons": [
-    {
-      "src": "/dice-192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "/dice-512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "start_url": "/",
-  "display": "standalone",
-  "theme_color": "#1a1207",
-  "background_color": "#1a1207"
+    "short_name": "RuleSnap",
+    "name": "Rule Snap",
+    "description": "Quick-reference board game manuals",
+    "icons": [
+        {
+            "src": "/dice-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/dice-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#1a1207",
+    "background_color": "#1a1207"
 }

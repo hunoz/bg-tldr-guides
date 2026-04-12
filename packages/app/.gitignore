@@ -3,6 +3,10 @@
 ios/
 android/
 
+# Auto-generated game registry and theme map
+games/registry.ts
+theme/themeMap.ts
+
 # Expo cache
 .expo/
 

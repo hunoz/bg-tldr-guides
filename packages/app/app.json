@@ -1,32 +1,24 @@
 {
-  "expo": {
-    "name": "Rule Snap",
-    "slug": "rulesnap",
-    "version": "1.0.0",
-    "icon": "./assets/images/dice.png",
-    "scheme": "rulesnap",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "web": {
-      "bundler": "metro",
-      "output": "single"
-    },
-    "plugins": [
-      "expo-router",
-      "expo-font",
-      "expo-localization"
-    ],
-    "experiments": {
-      "typedRoutes": true
-    },
-    "ios": {
-      "bundleIdentifier": "com.rulesnap"
-    },
-    "android": {
-      "package": "com.rulesnap"
+    "expo": {
+        "name": "Rule Snap",
+        "slug": "rulesnap",
+        "version": "1.0.0",
+        "icon": "./assets/images/dice.png",
+        "scheme": "rulesnap",
+        "platforms": ["ios", "android", "web"],
+        "web": {
+            "bundler": "metro",
+            "output": "single"
+        },
+        "plugins": ["expo-router", "expo-font", "expo-localization"],
+        "experiments": {
+            "typedRoutes": true
+        },
+        "ios": {
+            "bundleIdentifier": "com.rulesnap"
+        },
+        "android": {
+            "package": "com.rulesnap"
+        }
     }
-  }
 }

@@ -7,6 +7,7 @@
         "rulesReference": "Rules Reference"
     },
     "overview": {
+        "sidenav": "Overview",
         "rounds": "Rounds",
         "turns": "Turns",
         "simultaneous": "Simultaneous",

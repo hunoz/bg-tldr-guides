@@ -8,7 +8,6 @@ Expo-based React Native app for RuleSnap — board game rules reference guides f
 - pnpm
 - For iOS: Xcode + CocoaPods
 - For Android: Android Studio + Android SDK
-- Custom fonts downloaded to `assets/fonts/` (see `assets/fonts/README.md`)
 
 ## Getting Started
 
@@ -64,6 +63,7 @@ npx eas build --platform android
 ```
 
 ### iOS / Android (locally)
+
 ```bash
 # first time setup
 npx eas build:configure
@@ -94,86 +94,140 @@ pnpm ios
 app/                    # Expo Router file-based routes
   _layout.tsx           # Root layout (ThemeProvider + SideNav)
   index.tsx             # Home screen
-  castles-of-burgundy.tsx
-  quacks.tsx
+  [gameId].tsx          # Dynamic route — renders any registered game
   +not-found.tsx        # Catch-all → redirect to /
 assets/
-  fonts/                # Custom .ttf fonts (Cinzel, Crimson Text)
   i18n/                 # Translation JSON files by namespace/locale
+  images/               # Static images
 components/             # Shared UI components
-games/                  # Game screen implementations
+  GameScreen.tsx        # Generic game screen (renders any GameConfig)
+  SectionErrorBoundary.tsx
+games/                  # Game configs, themes, and section components
+  registry.ts           # Auto-generated from games/*/config.ts — do not edit
+  translations.ts       # Translation import map
   castles-of-burgundy/
-    CoBScreen.tsx
-    sections/           # Individual section components
+    config.ts           # Game configuration
+    theme.ts            # Game theme (colors, fonts, spacing)
+    sections/           # Section components
   quacks/
-    QuacksScreen.tsx
+    config.ts
+    theme.ts
     sections/
-hooks/                  # Custom hooks (useScrollTracker)
+hooks/                  # Custom hooks (useScrollTracker, useTheme)
 i18n/                   # i18next configuration
+scripts/
+  generate-registry.js  # Scans games/*/config.ts → generates registry.ts
+  generate-theme-map.js # Scans games/*/theme.ts → generates theme/themeMap.ts
 stores/                 # Zustand stores
-theme/                  # Theme definitions and context
+theme/                  # Theme interface, home theme, and auto-generated themeMap
+  themes.ts             # Theme interface + homeTheme
+  themeMap.ts           # Auto-generated from games/*/theme.ts — do not edit
+  ThemeContext.tsx       # React context provider
+types/                  # Shared TypeScript interfaces (GameConfig, etc.)
 utils/                  # Constants and helpers
 ```
 
 ## Adding a New Game
 
-1. **Add translation files** — Create `assets/i18n/{game-id}/en.json` (and other locales). The JSON must include an `app` key with `title` and `icon`:
+Adding a game requires three things: a config file, section components, and translations. The registry, routing, home screen, and SideNav update automatically.
 
-   ```json
-   {
-     "app": {
-       "title": "My Game",
-       "icon": "🎮"
-     },
-     "overview": { "sidenav": "Overview", "heading": "...", "body": "..." }
-   }
-   ```
+### 1. Create the game directory and config
 
-2. **Register translations in i18n** — Edit `i18n/index.ts`:
-   - Add static imports for the new JSON files
-   - Add the namespace to the `resources` object for each locale
-   - Add the namespace string to the `ns` array
+Create `games/{game-id}/config.ts`:
 
-   ```typescript
-   import myGameEn from '../assets/i18n/my-game/en.json';
+```typescript
+import { GameConfig } from '@/types/GameConfig';
 
-   const resources = {
-     en: { ..., 'my-game': myGameEn },
-   };
+export const config: GameConfig = {
+    id: 'my-game',
+    sections: ['overview', 'setup', 'gameplay'],
+    headerColor: '#2a4a3a',
+    bggUrl: 'https://boardgamegeek.com/boardgame/12345/my-game',
+    manualUrl: 'https://rulesnap.com/manuals/my-game.pdf',
+    sectionComponents: {
+        overview: () => import('./sections/Overview').then(m => ({ default: m.Overview })),
+        setup: () => import('./sections/Setup').then(m => ({ default: m.Setup })),
+        gameplay: () => import('./sections/Gameplay').then(m => ({ default: m.Gameplay })),
+    },
+};
+```
 
-   const ns = ['common', 'castles-of-burgundy', 'quacks', 'my-game'];
-   ```
+Optional config fields:
 
-3. **Create the game screen** — Add files under `games/{game-id}/`:
-   - `MyGameScreen.tsx` — main screen component (follow `CoBScreen.tsx` or `QuacksScreen.tsx` as a template)
-   - `sections/` — individual section components
+- `subtitleKey` — i18n key for the hero subtitle (defaults to `'app.subtitle'`)
+- `heroStyle` — per-game hero banner overrides (colors, border, spacing)
+- `sectionNavLabels` — custom SideNav labels per section (map section ID to a translation key, or `null` for auto-formatted fallback)
 
-4. **Add the route** — Create `app/{game-id}.tsx`:
+### 2. Create section components
 
-   ```typescript
-   import { MyGameScreen } from '../games/my-game/MyGameScreen';
+Add components in `games/{game-id}/sections/`. Each section is a named export:
 
-   export default function MyGameRoute() {
-     return <MyGameScreen />;
-   }
-   ```
+```typescript
+// games/my-game/sections/Overview.tsx
+export function Overview() {
+  return ( /* your section content */ );
+}
+```
 
-5. **Add a theme** (optional) — If the game needs custom colors, add a theme to `theme/themes.ts` and register it in `themeMap`:
+### 3. Add translation files
 
-   ```typescript
-   export const myGameTheme: Theme = { ... };
+Create `assets/i18n/{game-id}/en.json` (and other locales). Must include `app.title` and `app.icon`:
 
-   export const themeMap: Record<string, Theme> = {
-     ...,
-     'my-game': myGameTheme,
-   };
-   ```
+```json
+{
+    "app": { "title": "My Game", "subtitle": "Quick Reference", "icon": "🎮" },
+    "overview": { "sidenav": "Overview", "heading": "...", "body": "..." },
+    "setup": { "sidenav": "Setup", "heading": "..." }
+}
+```
 
-The home screen game list and SideNav are derived automatically from the `gameIds` array — no changes needed there.
+Then add the imports to `games/translations.ts`:
+
+```typescript
+import myGameEn from '../assets/i18n/my-game/en.json';
+
+export const translationMap = {
+    // ... existing entries
+    'my-game': { en: myGameEn },
+};
+```
+
+### 4. Add a theme (optional)
+
+If the game needs custom colors/fonts, create `games/{game-id}/theme.ts`:
+
+```typescript
+import type { Theme } from '../../theme/themes';
+
+export const theme: Theme = {
+    colors: {
+        background: '#1a2a1a',
+        card: '#2a3a2a',
+        text: '#e0e0e0',
+        textMuted: '#a0b0a0',
+        accent: '#4caf50',
+    },
+    fonts: { body: 'System', heading: 'System' },
+    spacing: { sectionMargin: 24, cardPadding: 16, containerPadding: 16 },
+};
+```
+
+The `themeMap` auto-generates when the file is saved (same as the registry). Without a `theme.ts`, the game falls back to the home theme.
+
+### That's it
+
+Both `registry.ts` and `themeMap.ts` auto-generate on save (via chokidar watcher in Metro) or on `pnpm start`/`pnpm build`. The dynamic `[gameId]` route, home screen, and SideNav all derive from the registry — no changes needed.
+
+## Editing an Existing Game
+
+- **Sections**: Edit components in `games/{game-id}/sections/`. Changes hot-reload.
+- **Config**: Edit `games/{game-id}/config.ts` to change sections, URLs, or hero styling. The registry regenerates automatically.
+- **Theme**: Edit `games/{game-id}/theme.ts` to change colors, fonts, or spacing. The theme map regenerates automatically.
+- **Translations**: Edit JSON files in `assets/i18n/{game-id}/`. Changes are picked up on reload.
 
 ## Adding or Modifying Translations
 
-Translation files live in `assets/i18n/{namespace}/{locale}.json`.
+Translation files live in `assets/i18n/{namespace}/{locale}.json`. The translation map in `games/translations.ts` connects them to the i18n system.
 
 ### Supported locales
 
@@ -183,8 +237,10 @@ Translation files live in `assets/i18n/{namespace}/{locale}.json`.
 ### Adding a new locale
 
 1. Create `{locale}.json` files in each namespace directory under `assets/i18n/`
-2. Add static imports and resource entries in `i18n/index.ts`
+2. Add the locale imports to `games/translations.ts` for each game
 3. Add the locale to `SUPPORTED_LOCALES` and `LOCALE_META` in `components/SideNav.tsx`
+
+No changes to `i18n/index.ts` needed — it builds resources dynamically from the registry and translation map.
 
 ### Modifying existing translations
 
@@ -198,14 +254,6 @@ Translation values can include HTML-like tags that the `RichText` component rend
 - `<em>italic</em>` → italic text
 - `<br>` or `<br/>` → line break
 - `<span className='qk-token qk-token-white'></span>` → colored token circle
-
-### Keeping web and mobile in sync
-
-The translation files in `assets/i18n/` are copies of `packages/web/src/i18n/translations/`. When updating translations, update both locations or copy from web to mobile.
-
-## Custom Fonts
-
-The Castles of Burgundy theme uses Cinzel (headings) and Crimson Text (body). Download the `.ttf` files per `assets/fonts/README.md` and uncomment the font loading block in `app/_layout.tsx`.
 
 ## Testing
 

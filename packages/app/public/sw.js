@@ -1,39 +1,33 @@
 //const CACHE_NAME = 'rulesnap-v1';
 const CACHE_NAME = `rulesnap-v${process.env.EXPO_PUBLIC_APP_VERSION || '1'}`;
-const PRECACHE_URLS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/dice-192.png',
-  '/dice-512.png',
-];
+const PRECACHE_URLS = ['/', '/index.html', '/manifest.json', '/dice-192.png', '/dice-512.png'];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_URLS))
-  );
-  self.skipWaiting();
+self.addEventListener('install', event => {
+    event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(PRECACHE_URLS)));
+    self.skipWaiting();
 });
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
-    )
-  );
-  self.clients.claim();
+self.addEventListener('activate', event => {
+    event.waitUntil(
+        caches
+            .keys()
+            .then(keys =>
+                Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))),
+            ),
+    );
+    self.clients.claim();
 });
 
-self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
+self.addEventListener('fetch', event => {
+    if (event.request.method !== 'GET') return;
 
-  event.respondWith(
-    caches.match(event.request).then((cached) => {
-      const networkFetch = fetch(event.request).then((response) => {
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, response.clone()));
-        return response;
-      });
-      return cached || networkFetch;
-    })
-  );
+    event.respondWith(
+        caches.match(event.request).then(cached => {
+            const networkFetch = fetch(event.request).then(response => {
+                caches.open(CACHE_NAME).then(cache => cache.put(event.request, response.clone()));
+                return response;
+            });
+            return cached || networkFetch;
+        }),
+    );
 });

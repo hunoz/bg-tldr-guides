@@ -3,5 +3,5 @@ import { Theme } from '../theme/themes';
 import { ThemeContext } from '../theme/ThemeContext';
 
 export function useTheme(): Theme {
-  return useContext(ThemeContext).theme;
+    return useContext(ThemeContext).theme;
 }
