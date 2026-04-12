@@ -23,6 +23,12 @@ export interface SideNavState {
   isOpen: boolean;
   toggle: () => void;
   close: () => void;
+  /** The game ID of the currently viewed game screen (null on home). */
+  currentGameId: string | null;
+  setCurrentGameId: (id: string | null) => void;
+  /** Whether the sidenav is showing the game list instead of sections. */
+  showingGameList: boolean;
+  setShowingGameList: (show: boolean) => void;
 }
 
 export const useSideNavStore = create<SideNavState>((set) => ({
@@ -33,4 +39,8 @@ export const useSideNavStore = create<SideNavState>((set) => ({
   isOpen: false,
   toggle: () => set((state) => ({ isOpen: !state.isOpen })),
   close: () => set({ isOpen: false }),
+  currentGameId: null,
+  setCurrentGameId: (currentGameId) => set({ currentGameId }),
+  showingGameList: false,
+  setShowingGameList: (showingGameList) => set({ showingGameList }),
 }));

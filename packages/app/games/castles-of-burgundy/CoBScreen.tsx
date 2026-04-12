@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../hooks/useTheme';
 import { useSideNavStore } from '../../stores/sidenav';
@@ -49,8 +48,7 @@ export function CoBScreen() {
   const common = useTranslation('common');
   const { t, i18n: i18nInstance } = useTranslation('castles-of-burgundy');
   const theme = useTheme();
-  const router = useRouter();
-  const { setGroups, setActiveId } = useSideNavStore();
+  const { setGroups, setActiveId, setCurrentGameId, setShowingGameList } = useSideNavStore();
   const {
     handleScroll,
     getSectionLayoutHandler,
@@ -61,24 +59,19 @@ export function CoBScreen() {
 
   // Set SideNav groups on mount
   useEffect(() => {
+    setCurrentGameId('castles-of-burgundy');
+    setShowingGameList(false);
     setGroups([
       {
-        items: [
-          {
-            id: 'back',
-            label: t('common:all-games', { ns: 'common' }),
-            icon: '←',
-            onSelect: () => router.push('/'),
-          },
-          ...sectionIds.map((id) => ({
-            id,
-            label: t(`${id}.sidenav`),
-            sectionId: id,
-            onSelect: () => scrollToSection(id),
-          })),
-        ],
+        items: sectionIds.map((id) => ({
+          id,
+          label: t(`${id}.sidenav`),
+          sectionId: id,
+          onSelect: () => scrollToSection(id),
+        })),
       },
     ]);
+    return () => { setCurrentGameId(null); };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18nInstance.language]);
 

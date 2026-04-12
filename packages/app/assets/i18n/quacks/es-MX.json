@@ -83,7 +83,8 @@
         }
     },
     "endOfRound": {
-        "title": "📜 Lista de Fin de Ronda",
+        "title": "📜 Lista de verificación de fin de ronda",
+        "sidenav": "Fin de la ronda",
         "bonusDie": {
             "header": "a) Dado de Bonificación",
             "description": "El jugador que alcanzó el espacio final más lejano <em>sin explotar</em> lanza el dado de bonificación. Empates: todos los jugadores empatados lanzan.",
@@ -151,6 +152,7 @@
     },
     "finalRound": {
         "title": "🏆 Ronda Final (Ronda 9)",
+        "sidenav": "Ronda Final",
         "intro": "Se juega normalmente con estas excepciones:",
         "noShopping": {
             "header": "Sin Compras",

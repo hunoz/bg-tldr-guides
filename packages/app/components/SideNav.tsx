@@ -10,10 +10,12 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import i18n from 'i18next';
+import i18n, { t } from 'i18next';
+import { useRouter } from 'expo-router';
 import { useSideNavStore, NavItem } from '../stores/sidenav';
 import { useTheme } from '../hooks/useTheme';
 import { ExternalLink } from './ExternalLink';
+import { gameIds } from '../i18n/index';
 
 const DRAWER_WIDTH = 280;
 const SUPPORTED_LOCALES = ['en', 'es-MX'];
@@ -34,13 +36,32 @@ function resolveLocale(detected: string): string {
   return match ?? 'en';
 }
 
+/** Build a sorted game list using i18n titles. */
+function getSortedGames() {
+  return [...gameIds]
+    .map((id) => ({
+      id,
+      icon: t('app.icon', { ns: id }),
+      title: t('app.title', { ns: id }),
+    }))
+    .sort((a, b) => a.title.localeCompare(b.title));
+}
+
 /**
  * Slide-out navigation drawer with grouped nav items, language selector,
  * active-item highlighting, and a GitHub footer link.
+ *
+ * When on a game page, an "All Games" button appears at the top. Pressing it
+ * replaces the section list with an alphabetical game list. Pressing the
+ * current game in that list restores the section view without navigating.
  */
 export function SideNav() {
-  const { groups, activeId, isOpen, toggle, close } = useSideNavStore();
+  const {
+    groups, activeId, isOpen, toggle, close,
+    currentGameId, showingGameList, setShowingGameList,
+  } = useSideNavStore();
   const theme = useTheme();
+  const router = useRouter();
   const translateX = useMemo(() => new Animated.Value(-DRAWER_WIDTH), []);
   const backdropOpacity = useMemo(() => new Animated.Value(0), []);
   const [localePickerOpen, setLocalePickerOpen] = useState(false);
@@ -84,7 +105,22 @@ export function SideNav() {
     handleClose();
   };
 
+  const handleAllGamesPress = () => {
+    setShowingGameList(!showingGameList);
+  };
+
+  const handleGamePress = (gameId: string) => {
+    if (gameId === currentGameId) {
+      // Already on this game — just switch back to sections view
+      setShowingGameList(false);
+    } else {
+      router.push(`/${gameId}` as never);
+      handleClose();
+    }
+  };
+
   const screenHeight = Dimensions.get('window').height;
+  const sortedGames = useMemo(() => getSortedGames(), [currentLocale]);
 
   return (
     <>
@@ -189,57 +225,129 @@ export function SideNav() {
             )}
           </View>
 
-          {/* Grouped nav items */}
-          {groups.map((group, groupIndex) => (
-            <View key={group.title ?? `group-${groupIndex}`} style={styles.group}>
-              {group.title ? (
-                <Text
-                  style={[
-                    styles.groupTitle,
-                    { color: theme.colors.textMuted },
-                  ]}
-                >
-                  {group.title}
-                </Text>
-              ) : null}
-              {group.items.map((item) => {
-                const isActive = item.id === activeId;
+          {/* "All Games" toggle — only shown on game pages */}
+          {currentGameId && (
+            <Pressable
+              onPress={handleAllGamesPress}
+              style={[
+                styles.navItem,
+                showingGameList && {
+                  backgroundColor: theme.colors.accent + '25',
+                  borderLeftColor: theme.colors.accent,
+                  borderLeftWidth: 3,
+                },
+              ]}
+              accessibilityRole="button"
+            >
+              <Text style={[styles.navItemIcon, { color: theme.colors.text }]}>
+                {showingGameList ? '←' : '🎲'}
+              </Text>
+              <Text style={[styles.navItemLabel, { color: theme.colors.text }]}>
+                {showingGameList
+                  ? t('app.title', { ns: currentGameId })
+                  : t('common:all-games')}
+              </Text>
+            </Pressable>
+          )}
+
+          {/* Conditional content: game list OR section groups */}
+          {currentGameId && showingGameList ? (
+            <View style={styles.group}>
+              <Text
+                style={[styles.groupTitle, { color: theme.colors.textMuted }]}
+              >
+                {t('common:games')}
+              </Text>
+              {sortedGames.map((game) => {
+                const isCurrent = game.id === currentGameId;
                 return (
                   <Pressable
-                    key={item.id}
-                    onPress={() => handleItemPress(item)}
+                    key={game.id}
+                    onPress={() => handleGamePress(game.id)}
                     style={[
                       styles.navItem,
-                      isActive && {
+                      isCurrent && {
                         backgroundColor: theme.colors.accent + '25',
                         borderLeftColor: theme.colors.accent,
                         borderLeftWidth: 3,
                       },
                     ]}
                     accessibilityRole="button"
-                    accessibilityState={{ selected: isActive }}
+                    accessibilityState={{ selected: isCurrent }}
                   >
-                    {item.icon ? (
-                      <Text style={[styles.navItemIcon, { color: theme.colors.text }]}>{item.icon}</Text>
-                    ) : null}
+                    <Text style={[styles.navItemIcon, { color: theme.colors.text }]}>
+                      {game.icon}
+                    </Text>
                     <Text
                       style={[
                         styles.navItemLabel,
                         { color: theme.colors.text },
-                        isActive && {
+                        isCurrent && {
                           color: theme.colors.accent,
                           fontWeight: '600',
                         },
                       ]}
                       numberOfLines={2}
                     >
-                      {item.label}
+                      {game.title}
                     </Text>
                   </Pressable>
                 );
               })}
             </View>
-          ))}
+          ) : (
+            /* Section groups (default view, also used on home) */
+            groups.map((group, groupIndex) => (
+              <View key={group.title ?? `group-${groupIndex}`} style={styles.group}>
+                {group.title ? (
+                  <Text
+                    style={[
+                      styles.groupTitle,
+                      { color: theme.colors.textMuted },
+                    ]}
+                  >
+                    {group.title}
+                  </Text>
+                ) : null}
+                {group.items.map((item) => {
+                  const isActive = item.id === activeId;
+                  return (
+                    <Pressable
+                      key={item.id}
+                      onPress={() => handleItemPress(item)}
+                      style={[
+                        styles.navItem,
+                        isActive && {
+                          backgroundColor: theme.colors.accent + '25',
+                          borderLeftColor: theme.colors.accent,
+                          borderLeftWidth: 3,
+                        },
+                      ]}
+                      accessibilityRole="button"
+                      accessibilityState={{ selected: isActive }}
+                    >
+                      {item.icon ? (
+                        <Text style={[styles.navItemIcon, { color: theme.colors.text }]}>{item.icon}</Text>
+                      ) : null}
+                      <Text
+                        style={[
+                          styles.navItemLabel,
+                          { color: theme.colors.text },
+                          isActive && {
+                            color: theme.colors.accent,
+                            fontWeight: '600',
+                          },
+                        ]}
+                        numberOfLines={2}
+                      >
+                        {item.label}
+                      </Text>
+                    </Pressable>
+                  );
+                })}
+              </View>
+            ))
+          )}
         </ScrollView>
 
         {/* Footer with GitHub link */}

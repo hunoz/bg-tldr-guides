@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../../hooks/useTheme';
 import { useSideNavStore } from '../../stores/sidenav';
@@ -34,8 +33,8 @@ const sectionLabels: Record<string, string | null> = {
   overview: null,
   setup: 'setup.title',
   roundStructure: 'roundStructure.title',
-  endOfRound: null,
-  finalRound: null,
+  endOfRound: 'endOfRound.sidenav',
+  finalRound: 'finalRound.sidenav',
 };
 
 /**
@@ -46,8 +45,7 @@ export function QuacksScreen() {
   const common = useTranslation('common');
   const { t, i18n: i18nInstance } = useTranslation('quacks');
   const theme = useTheme();
-  const router = useRouter();
-  const { setGroups, setActiveId } = useSideNavStore();
+  const { setGroups, setActiveId, setCurrentGameId, setShowingGameList } = useSideNavStore();
   const {
     handleScroll,
     getSectionLayoutHandler,
@@ -58,24 +56,19 @@ export function QuacksScreen() {
 
   // Set SideNav groups on mount
   useEffect(() => {
+    setCurrentGameId('quacks');
+    setShowingGameList(false);
     setGroups([
       {
-        items: [
-          {
-            id: 'back',
-            label: t('common:all-games', { ns: 'common' }),
-            icon: '←',
-            onSelect: () => router.push('/'),
-          },
-          ...sectionIds.map((id) => ({
-            id,
-            label: sectionLabels[id] ? t(sectionLabels[id]!) : id.charAt(0).toUpperCase() + id.slice(1).replace(/([A-Z])/g, ' $1'),
-            sectionId: id,
-            onSelect: () => scrollToSection(id),
-          })),
-        ],
+        items: sectionIds.map((id) => ({
+          id,
+          label: sectionLabels[id] ? t(sectionLabels[id]!) : id.charAt(0).toUpperCase() + id.slice(1).replace(/([A-Z])/g, ' $1'),
+          sectionId: id,
+          onSelect: () => scrollToSection(id),
+        })),
       },
     ]);
+    return () => { setCurrentGameId(null); };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [i18nInstance.language]);
 

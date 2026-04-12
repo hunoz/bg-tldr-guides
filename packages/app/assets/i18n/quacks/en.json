@@ -83,6 +83,7 @@
     },
     "endOfRound": {
         "title": "📜 End of Round Checklist",
+        "sidenav": "End of Round",
         "bonusDie": {
             "header": "a) Bonus Die",
             "description": "The player who reached the farthest final space <em>without exploding</em> rolls the bonus die. Ties: all tied players roll.",
@@ -150,6 +151,7 @@
     },
     "finalRound": {
         "title": "🏆 Final Round (Round 9)",
+        "sidenav": "Final Round",
         "intro": "Played normally with these exceptions:",
         "noShopping": {
             "header": "No Shopping",
